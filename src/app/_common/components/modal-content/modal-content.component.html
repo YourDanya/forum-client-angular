@@ -1,8 +1,10 @@
-<div class="nav">
-  <div class="nav__title">
-    Danyl Forum
-  </div>
-  <div class="login">
-    Log in
-  </div>
+<div
+    class="modal-content modal"
+    [class]="class"
+    [class.modal--active]="active"
+>
+    <app-close-svg class="modal__close"/>
+    <div class="modal__content">
+        <ng-content/>
+    </div>
 </div>

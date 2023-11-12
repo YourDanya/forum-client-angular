@@ -1,41 +1,15 @@
 import {Injectable} from '@angular/core'
-import {ActivatedRoute} from '@angular/router'
-import {ValidsRec} from './validation.types'
-import {Values} from './validation.types'
-import {Lang} from '../../types/lang.types'
-import {Valids} from './validation.types'
+import {Lang} from 'src/app/_common/types/translation/lang.type'
+import {ValidationValue} from 'src/app/_common/utils/form/validation/validation.types'
+import {InputValues} from 'src/app/_common/types/form/input-values.type'
 
 @Injectable({
     providedIn: 'root'
 })
 export class Validator {
-    symbol(number: number, lang: Lang) {
-        const lastChar = number % 10
-        const lastTen = number % 100
-        if (lang === 'en') {
-            if (lastChar === 1) {
-                return ''
-            } else {
-                return 's'
-            }
-        }
-        if (lastTen > 10 && lastTen < 20) {
-            return 'ов'
-        }
-        if (lastChar === 1) {
-            return ''
-        }
-        if (lastChar === 2 || lastChar === 3 || lastChar === 4) {
-            return 'а'
-        }
-        return 'ов'
-    }
-
-    validateOne(
-        params: {
-            validations: Valids, name: string, values: Values<any>, translations?: Record<string, string>, lang: Lang
-        }
-    ) {
+    validateOne(params: {
+        validations: ValidationValue, name: string, values: InputValues, translations?: Record<string, string>, lang: Lang
+    }) {
         let {validations, name, values, translations, lang} = params
 
         let error = ''
@@ -140,15 +114,25 @@ export class Validator {
         return error
     }
 
-    validateAll({values, validations, lang}: { values: Values<any>, validations: ValidsRec, lang: Lang }) {
-        const errors: Record<string, string> = {}
-        let name: keyof typeof values
-        for (name in values) {
-            const value = values[name]
-            errors[name] = this.validateOne({
-                validations: validations[name], name, values, lang
-            })
+    symbol(number: number, lang: Lang) {
+        const lastChar = number % 10
+        const lastTen = number % 100
+        if (lang === 'en') {
+            if (lastChar === 1) {
+                return ''
+            } else {
+                return 's'
+            }
         }
-        return errors
+        if (lastTen > 10 && lastTen < 20) {
+            return 'ов'
+        }
+        if (lastChar === 1) {
+            return ''
+        }
+        if (lastChar === 2 || lastChar === 3 || lastChar === 4) {
+            return 'а'
+        }
+        return 'ов'
     }
 }

@@ -1,5 +1,27 @@
-<ng-template #item let-name>
-    <div class="item">
-        {{ name }}
+<ng-container *ngIf="check" [ngTemplateOutlet]="testItems"></ng-container>
+<button (click)="onCheck()">{{check}}</button>
+<button class="test__button" (click)="onClick()">click</button>
+<app-test-first></app-test-first>
+<app-test-second></app-test-second>
+
+<ng-template #testItem let-item>
+    <div class="test-item item">
+        <div class="item__id">
+            {{toItem(item).id}}
+        </div>
+        <div class="item__name">
+            {{toItem(item).text}}
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #testItems>
+    <div class="test-items items">
+        <ng-container
+            *ngFor="let item of items"
+            [ngTemplateOutlet]="testItem"
+            [ngTemplateOutletContext]="{$implicit: item}"
+        >
+        </ng-container>
     </div>
 </ng-template>

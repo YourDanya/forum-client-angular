@@ -1,0 +1,73 @@
+<app-modal-content
+    [class]="'nav-auth auth'"
+    [active]="modalActive"
+>
+    <ng-container [ngTemplateOutlet]="top"/>
+    <ng-container [ngTemplateOutlet]="form"/>
+    <ng-container [ngTemplateOutlet]="bottom"/>
+</app-modal-content>
+
+<ng-template #top>
+    <div class="auth__login">
+        {{translation.login}}
+    </div>
+    <div class="auth__policy">
+        {{translation.policy}}
+    </div>
+    <app-button [class]="'auth__google'">
+        <app-google-svg class="auth__google-icon"/>
+        <div class="auth__google-text">
+            {{translation.google}}
+        </div>
+    </app-button>
+    <div class="auth__separator">
+        <div class="auth__separator-line"></div>
+        <div class="auth__or">
+            {{translation.or}}
+        </div>
+        <div class="auth__separator-line"></div>
+    </div>
+</ng-template>
+
+<ng-template #form>
+    <form class="auth__form">
+        <app-input
+            [class]="'auth__input'"
+            [name]="'email'"
+            [value]="values.email"
+            [error]="errors.email"
+            [placeholder]="translation.form.email"
+            (changeEvent)="onChange($event)"
+        />
+        <app-input
+            [class]="'auth__input'"
+            [name]="'password'"
+            [value]="values.password"
+            [type]="'password'"
+            [error]="errors.password"
+            [placeholder]="translation.form.password"
+            (changeEvent)="onChange($event)"
+        />
+    </form>
+</ng-template>
+
+<ng-template #bottom>
+    <div class="auth__forgot">
+        {{translation.forgot}}
+        <a class="auth__link" href="/">
+            {{translation.password}}
+        </a>
+        ?
+    </div>
+    <div class="auth__signup">
+        {{translation.new}}
+        <a class="auth__link" href="/">
+            {{translation.signup}}
+        </a>
+    </div>
+    <app-button
+        [class]="'auth__submit' + (submitActive ? ' auth__submit--active' : '')"
+    >
+        {{translation.login}}
+    </app-button>
+</ng-template>

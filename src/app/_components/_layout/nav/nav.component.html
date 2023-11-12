@@ -1,0 +1,26 @@
+<nav class="nav">
+    <div class="nav__title">
+        Dan<span class="nav__red-chars">f</span>orum
+    </div>
+    <ng-container [ngTemplateOutlet]="navSearch"/>
+    <app-button [class]="'nav__login'" (clickEvent)="onLoginClick()">
+        {{translation.login}}
+    </app-button>
+    <app-modal [active]="modalActive" (closeEvent)="onCloseModal()"/>
+    <app-auth [modalActive]="modalActive"/>
+</nav>
+
+<ng-template #navSearch>
+    <div class="nav-search search">
+        <app-button [class]="'search__button'">
+            <app-search-svg [class]="'search__icon'"/>
+        </app-button>
+        <app-input
+            [class]="'search-input'"
+            [placeholder]="'Search'"
+            [name]="'search'"
+            [value]="searchValue"
+            (changeEvent)="onSearchChange($event)"
+        />
+    </div>
+</ng-template>

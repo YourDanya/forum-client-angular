@@ -1,0 +1,45 @@
+.nav
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 10px 20px
+  .nav__title
+    font-family: Vag
+    font-size: 20px
+  .nav__red-chars
+    color: red
+    font-family: Vag
+    font-size: 20px
+  .nav__login
+    width: 70px
+    height: 40px
+    border-radius: 50px
+    font-weight: 700
+    background-color: red
+    color: white
+
+.nav-search.search
+  position: relative
+  width: 600px
+  .search__button
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    left: 16px
+  .search__icon
+    display: block
+  .input__container
+    background-color: #eaedef
+    padding: 12px 40px
+    border-radius: 50px
+  .input__placeholder
+    color: #757e85
+  .input__field
+    color: #0F1A1C
+
+@media (max-width: 1200px)
+  .nav__title
+    margin-right: 20px
+  .nav-search.search
+    width: 100%
+    margin-right: 20px

@@ -1,0 +1,14 @@
+app-modal-content:host
+  display: contents
+
+.modal-content.modal
+  z-index: 100
+  position: fixed
+  visibility: hidden
+  opacity: 0
+  transition: 0.4s all
+  background-color: white
+
+.modal-content.modal--active
+  visibility: visible
+  opacity: 1

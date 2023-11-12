@@ -1,13 +1,19 @@
 import {Component} from '@angular/core'
-import {ViewEncapsulation} from '@angular/core'
 import {Input} from '@angular/core'
 
 @Component({
-    selector: 'app-spinner',
-    templateUrl: 'spinner.component.html',
-    styleUrls: ['spinner.styles.sass'],
-    encapsulation: ViewEncapsulation.Emulated
+    selector: 'app-svg',
+    templateUrl: 'svg.component.html',
+    styleUrls: ['svg.styles.sass']
 })
-export class SpinnerComponent {
-    @Input() class = ''
+export class SvgComponent {
+    @Input()
+    class: string
+
+    _path!: string
+
+    @Input()
+    public set path(filePath: string) {
+        this._path = filePath
+    }
 }

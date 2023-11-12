@@ -1,23 +1,39 @@
-<div class="input" [class]="class">
-    <div class="input__state" [class.input__state-focused]="focused">
-        <div class="input__wrapper">
-            <ng-template *ngIf="type === 'textarea' else field">
-                <textarea class="input__textarea" name="{{name}}"></textarea>
-            </ng-template>
-            <ng-template #field>
-                <input
-                    class="input__field"
-                    name="{{name}}"
-                    type="{{type}}"
-                    (change)="onChange"
-                    (focus)="onFocus"
-                >
-                </input>
-            </ng-template>
-            <div class="input__placeholder" *ngIf="placeholder">
-                {{placeholder}}
-            </div>
+<div
+    class="input"
+    [class]="class"
+    [class.input--textarea]="type==='textarea'"
+    [class.input--focused]="focused"
+    [class.input--filled]="value"
+>
+    <div class="input__container">
+        <ng-container [ngTemplateOutlet]="inputWrapper"/>
+    </div>
+    <div *ngIf="error" class="input__error">
+        {{error}}
+    </div>
+</div>
+
+<ng-template #inputWrapper>
+    <div class="input__wrapper">
+        <textarea
+            *ngIf="type === 'textarea'"
+            class="input__field input__textarea"
+            name="{{name}}"
+            (input)="onChange($event)"
+            (focus)="onFocus($event)"
+            (blur)="onBlur($event)"
+        ></textarea>
+        <input
+            *ngIf="type !== 'textarea'"
+            class="input__field"
+            name="{{name}}"
+            type="{{type}}"
+            (input)="onChange($event)"
+            (focus)="onFocus($event)"
+            (blur)="onBlur($event)"
+        >
+        <div *ngIf="placeholder" class="input__placeholder">
+            {{placeholder}}
         </div>
     </div>
-    <div class="input__error" *ngIf="error"></div>
-</div>
+</ng-template>

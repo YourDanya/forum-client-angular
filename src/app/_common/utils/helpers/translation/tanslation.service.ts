@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core'
 import {ActivatedRoute} from '@angular/router'
-import {Lang} from 'src/app/_common/types/lang.types'
+import {Lang} from 'src/app/_common/types/translation/lang.type'
 
 @Injectable({
     providedIn: 'root'
