@@ -11,6 +11,4 @@ import {dictionary} from 'src/app/_components/_layout/nav/nav.content'
     providers: [TranslationService]
 })
 export class HomeComponent {
-    constructor(private translationService: TranslationService) {}
-    test = ''
 }

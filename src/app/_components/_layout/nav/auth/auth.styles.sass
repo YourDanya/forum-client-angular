@@ -6,8 +6,19 @@ app-auth
   left: 50%
   transform: translateY(-50%) translateX(-50%)
   width: 528px
-  padding: 24px 80px
+  padding: 24px 0
   border-radius: 20px
+  .modal__content
+    padding: 0 80px
+  .modal__close-wrapper
+    display: flex
+    justify-content: flex-end
+    padding: 0 24px
+    margin-bottom: 8px
+  .modal__close-button
+    padding: 7px
+    background-color: #eaedef
+    border-radius: 50px
   .auth__login
     font-size: 24px
     margin-bottom: 8px
@@ -95,3 +106,14 @@ app-auth
     color: white
     &:hover
       background-color: #962900
+
+
+@media (max-width: 576px)
+  .nav-auth.auth
+    width: 100%
+    height: 100%
+    border-radius: unset
+    .modal__content
+      padding: 0 16px
+    .modal__close-wrapper
+      padding: 0 16px

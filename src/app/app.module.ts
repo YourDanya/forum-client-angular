@@ -19,6 +19,7 @@ import {ModalContentComponent} from 'src/app/_common/components/modal-content/mo
 import {AuthComponent} from 'src/app/_components/_layout/nav/auth/auth.component'
 import {GoogleSvgComponent} from 'src/app/_common/svg/google/google.component'
 import {CloseSvgComponent} from 'src/app/_common/svg/close/close.component'
+import {AuthModule} from 'src/app/auth/auth.module'
 
 @NgModule({
     declarations: [

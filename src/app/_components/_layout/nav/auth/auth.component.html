@@ -1,6 +1,7 @@
 <app-modal-content
     [class]="'nav-auth auth'"
     [active]="modalActive"
+    (closeEvent)="onClose()"
 >
     <ng-container [ngTemplateOutlet]="top"/>
     <ng-container [ngTemplateOutlet]="form"/>
@@ -54,14 +55,14 @@
 <ng-template #bottom>
     <div class="auth__forgot">
         {{translation.forgot}}
-        <a class="auth__link" href="/">
+        <a class="auth__link" routerLink="auth/login">
             {{translation.password}}
         </a>
         ?
     </div>
     <div class="auth__signup">
         {{translation.new}}
-        <a class="auth__link" href="/">
+        <a class="auth__link" routerLink="auth/register">
             {{translation.signup}}
         </a>
     </div>

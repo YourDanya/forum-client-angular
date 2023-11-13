@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core'
+import {Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewEncapsulation} from '@angular/core'
 import {ActivatedRoute} from '@angular/router'
 import {dictionary} from 'src/app/_components/_layout/nav/auth/auth.content'
 import {initErrors} from 'src/app/_components/_layout/nav/auth/auth.content'
@@ -26,6 +26,9 @@ export class AuthComponent {
     errors: InputErrors<typeof initErrors> = {...initErrors}
     translation: Translation<typeof dictionary>
     submitActive = false
+
+    @Output()
+    closeEvent = new EventEmitter()
 
     constructor(
         private route: ActivatedRoute,
@@ -56,4 +59,7 @@ export class AuthComponent {
         }
     }
 
+    onClose () {
+        this.closeEvent.emit()
+    }
 }

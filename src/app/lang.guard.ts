@@ -12,11 +12,15 @@ export class LangGuard implements CanActivate {
     constructor(private router: Router) {}
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-        const lang = next.paramMap.get('lang')
-        console.log('lang', lang)
+        const lang = next.params['lang']
+        console.log('test', lang)
+
         if (lang !== 'en' && lang !== 'ru') {
-            const englishUrl = `en/${state.url}`
-            return this.router.parseUrl(englishUrl)
+            const englishUrl = `en${state.url}`
+            console.log('englishUrl', englishUrl)
+            const url = this.router.parseUrl('/en')
+            // console.log('url', url)
+            return url
         }
         return true
     }
