@@ -20,16 +20,15 @@ import {AuthComponent} from 'src/app/_components/_layout/nav/auth/auth.component
 import {GoogleSvgComponent} from 'src/app/_common/svg/google/google.component'
 import {CloseSvgComponent} from 'src/app/_common/svg/close/close.component'
 import {AuthModule} from 'src/app/auth/auth.module'
+import {CommonModule} from '@angular/common'
+import {SharedModule} from 'src/app/_common/shared.module'
 
 @NgModule({
     declarations: [
-        AppComponent, LayoutComponent, NavComponent, AuthComponent, ButtonComponent, SpinnerComponent, TestComponent,
-        FirstComponent, SecondComponent, InputComponent, SvgComponent, SearchSvgComponent, GoogleSvgComponent,
-        ModalComponent, ModalContentComponent, CloseSvgComponent
+        AppComponent, LayoutComponent, NavComponent, AuthComponent, TestComponent, FirstComponent, SecondComponent
     ],
     imports: [
-        BrowserModule,
-        AppRoutingModule
+        BrowserModule, SharedModule, AppRoutingModule
     ],
     providers: [
         TestService
