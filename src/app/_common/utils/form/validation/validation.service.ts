@@ -23,7 +23,7 @@ export class ValidationService<T extends InputValues> {
     validateOne(
         {name}: { name: keyof T & string},
     ) {
-        const lang = this.route.snapshot.paramMap.get('lang') as Lang
+        const lang = this.route.root.firstChild?.snapshot.paramMap.get('lang') as Lang
 
         const newError = this.validator.validateOne({
             validations: this.validations[name], name, lang, values: this.values

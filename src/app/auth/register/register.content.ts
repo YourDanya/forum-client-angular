@@ -1,6 +1,6 @@
 export const dictionary = {
     en: {
-        signup: 'signup',
+        signup: 'Sign up',
         policy: 'By continuing, you are setting up a account and agree to our User Agreement and Privacy Policy',
         google: 'Continue with google',
         or: 'or',
@@ -33,12 +33,19 @@ export const initValues = {
     email: '',
     name: '',
     password: '',
-    passwordConform: ''
+    passwordConfirm: ''
+}
+
+export const initErrors = {
+    email: '',
+    name: '',
+    password: '',
+    passwordConfirm: ''
 }
 
 export const validations = {
     email: {minLength: 5, isEmail: true, maxLength: 50},
     name: {minLength: 5, maxLength: 50},
     password: {minLength: 5, maxLength: 50},
-    passwordConform: {minLength: 5, maxLength: 50}
+    passwordConfirm: {minLength: 5, maxLength: 50}
 }

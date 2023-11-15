@@ -17,25 +17,23 @@ export class NavComponent {
     translation: Translation<typeof dictionary>
     searchValue = ''
     modalActive = false
+    hide = false
 
     constructor(
         private translationService: TranslationService,
-        private route: ActivatedRoute,
         private router: Router
     ) {
         this.translation = this.translationService.translate(dictionary)
     }
 
     ngOnInit() {
-        const test = this.router.routerState.snapshot
-        console.log('test', test)
+        this.checkHide(this.router.url)
 
         this.router.events.pipe(
             filter(event => event instanceof NavigationStart),
             map(event => event as NavigationStart),
-            filter(event => event.url === '/')
         ).subscribe((event) => {
-            console.log('redirect', event)
+            this.checkHide(event.url)
         })
     }
 
@@ -49,5 +47,9 @@ export class NavComponent {
 
     onCloseModal() {
         this.modalActive = false
+    }
+
+    checkHide(url: string) {
+        this.hide = url.includes('auth')
     }
 }

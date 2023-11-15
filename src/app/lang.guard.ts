@@ -1,28 +1,17 @@
-import {Injectable} from '@angular/core'
-import {ActivatedRouteSnapshot} from '@angular/router'
+import {inject} from '@angular/core'
+import {Route, UrlSegment} from '@angular/router'
 import {Router} from '@angular/router'
-import {RouterStateSnapshot} from '@angular/router'
-import {CanActivate} from '@angular/router'
 
-@Injectable({
-    providedIn: 'root'
-})
-export class LangGuard implements CanActivate {
+export const canMatch = (_: Route, segments: UrlSegment[]) => {
+    const router = inject(Router)
 
-    constructor(private router: Router) {}
+    console.log('segments', segments)
 
-    canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-        const lang = next.params['lang']
-        console.log('test', lang)
-
-        if (lang !== 'en' && lang !== 'ru') {
-            const englishUrl = `en${state.url}`
-            console.log('englishUrl', englishUrl)
-            const url = this.router.parseUrl('/en')
-            // console.log('url', url)
-            return url
-        }
-        return true
+    if (segments[0]?.path !== 'en' && segments[0]?.path !== 'ru') {
+        const newUrl = `/en/${segments.join('/')}`
+        router.navigate([newUrl])
+        return false
     }
 
+    return true
 }

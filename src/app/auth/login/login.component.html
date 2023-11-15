@@ -1,1 +1,70 @@
-login
+<div
+    class="auth-page-content auth login"
+>
+    <ng-container [ngTemplateOutlet]="top"/>
+    <ng-container [ngTemplateOutlet]="form"/>
+    <ng-container [ngTemplateOutlet]="bottom"/>
+</div>
+
+<ng-template #top>
+    <div class="auth__title">
+        {{translation.login}}
+    </div>
+    <div class="auth__policy">
+        {{translation.policy}}
+    </div>
+    <app-button [class]="'auth__google'">
+        <app-google-svg class="auth__google-icon"/>
+        <div class="auth__google-text">
+            {{translation.google}}
+        </div>
+    </app-button>
+    <div class="auth__separator">
+        <div class="auth__separator-line"></div>
+        <div class="auth__or">
+            {{translation.or}}
+        </div>
+        <div class="auth__separator-line"></div>
+    </div>
+</ng-template>
+
+<ng-template #form>
+    <form class="auth__form" type="submit">
+        <app-input
+            [class]="'auth__input'"
+            [name]="'email'"
+            [value]="values.email"
+            [error]="errors.email"
+            [placeholder]="translation.form.email"
+            (changeEvent)="onChange($event)"
+        />
+        <app-input
+            [class]="'auth__input'"
+            [name]="'password'"
+            [value]="values.password"
+            [type]="'password'"
+            [error]="errors.password"
+            [placeholder]="translation.form.password"
+            (changeEvent)="onChange($event)"
+        />
+        <app-button
+            [class]="'auth__submit'"
+            (clickEvent)="onSubmit($event)"
+        >
+            {{translation.login}}
+        </app-button>
+    </form>
+</ng-template>
+
+<ng-template #bottom>
+    <div class="auth__link-wrapper login__forgot">
+        {{translation.forgot}}
+        <a class="auth__link" routerLink="/auth/forgot">{{translation.password}}</a>?
+    </div>
+    <div class="auth__link-wrapper">
+        {{translation.new}}
+        <a class="auth__link" routerLink="/auth/register">
+            {{translation.signup}}
+        </a>
+    </div>
+</ng-template>

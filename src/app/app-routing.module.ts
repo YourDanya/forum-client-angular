@@ -1,19 +1,13 @@
 import {NgModule} from '@angular/core'
 import {RouterModule, Routes} from '@angular/router'
-import {LangGuard} from 'src/app/lang.guard'
+import {canMatch} from 'src/app/lang.guard'
 import {LayoutComponent} from 'src/app/_components/_layout/layout.component'
 import {HomeComponent} from 'src/app/_components/home/home.component'
 
 const routes: Routes = [
     {
-        path: '',
-        pathMatch: 'full',
-        canActivate: [LangGuard],
-        children: []
-    },
-    {
         path: ':lang',
-        canActivate: [LangGuard],
+        canMatch: [canMatch],
         component: LayoutComponent,
         children: [
             {
@@ -25,6 +19,12 @@ const routes: Routes = [
                 loadChildren: () => import('src/app/auth/auth.module').then(m => m.AuthModule)
             }
         ]
+    },
+    {
+        path: '',
+        pathMatch: 'full',
+        canMatch: [canMatch],
+        children: []
     },
     {
         path: '**',

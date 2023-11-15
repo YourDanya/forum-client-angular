@@ -1,1 +1,49 @@
-forgot
+<div
+    class="auth-page-content auth forgot"
+>
+    <ng-container [ngTemplateOutlet]="top"/>
+    <ng-container [ngTemplateOutlet]="form"/>
+    <ng-container [ngTemplateOutlet]="bottom"/>
+</div>
+
+<ng-template #top>
+    <div class="auth__title">
+        {{translation.reset}}
+    </div>
+    <div class="auth__policy">
+        {{translation.policy}}
+    </div>
+</ng-template>
+
+<ng-template #form>
+    <form class="auth__form" type="submit">
+        <app-input
+            [class]="'auth__input'"
+            [name]="'email'"
+            [value]="values.email"
+            [error]="errors.email"
+            [placeholder]="translation.form.email"
+            (changeEvent)="onChange($event)"
+        />
+        <app-button
+            [class]="'auth__submit'"
+            (clickEvent)="onSubmit($event)"
+        >
+            {{translation.reset}}
+        </app-button>
+    </form>
+</ng-template>
+
+<ng-template #bottom>
+    <div class="forgot__links">
+        <a class="auth__link" routerLink="/auth/register">
+            {{translation.signup}}
+        </a>
+        <div class="forgot__link-separator">
+            •
+        </div>
+        <a class="auth__link" routerLink="/auth/login">
+            {{translation.login}}
+        </a>
+    </div>
+</ng-template>

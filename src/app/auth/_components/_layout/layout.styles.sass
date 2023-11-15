@@ -1,2 +1,101 @@
 .auth-page.auth
+  display: flex
+  align-items: center
+  .auth__art
+    margin-right: 24px
+    background-image: url(https://www.redditstatic.com/accountmanager/bbb584033aa89e39bad69436c504c9bd.png)
+    height: 100vh
+    width: 156px
+    min-height: 430px
+    background-repeat: no-repeat
+    background-size: cover
 
+.auth-page-content.auth
+  width: 280px
+  .auth__title
+    font-weight: 500
+    font-size: 18px
+    margin-bottom: 8px
+    &:first-letter
+      text-transform: capitalize
+  .auth__policy
+    font-family: "Noto Sans", sans-serif
+    font-size: 12px
+    line-height: 18px
+    margin-bottom: 30px
+  .auth__google
+    width: 100%
+    display: grid
+    grid-template-columns: auto 1fr auto 1fr
+    grid-template-areas: 'icon . text .'
+    margin-bottom: 24px
+    padding: 12px
+    border: 1px solid #dadce0
+    border-radius: 50px
+  .auth__google-icon
+    grid-area: icon
+    width: 18px
+    height: 18px
+    display: block
+  .auth__google-text
+    grid-area: text
+  .auth__separator
+    position: relative
+    display: grid
+    grid-template-columns: 1fr auto 1fr
+    align-items: center
+    margin-bottom: 24px
+  .auth__separator-line
+    height: 1px
+    background-color: #d6d6d6
+  .auth__or
+    color: #434343
+    font-size: 12px
+    text-transform: uppercase
+    padding: 0 16px
+    background-color: white
+  .input
+    margin-bottom: 12px
+  .input__container
+    padding: 22px 12px 10px
+    background-color: #fcfcfb
+    border-radius: 4px
+    border: 1px solid rgba(0, 0, 0, 0.1)
+    margin-bottom: 5px
+  .input__wrapper
+    display: contents
+  .input__placeholder
+    text-transform: uppercase
+    color: #a5a4a4
+    font-size: 10px
+    font-weight: 700
+    font-family: IBMPlexSans, sans-serif
+    transition: 0.2s all ease-in-out
+  .input--focused, .input--filled
+    .input__placeholder
+      display: block
+      transform: translateY(-12px)
+      font-size: 8px
+  .input__error
+    color: red
+    font-size: 11px
+  .input__field
+    font-size: 12px
+    font-family: "Noto Sans", sans-serif
+  .auth__submit
+    font-weight: 600
+    text-transform: uppercase
+    height: 35px
+    width: 100%
+    color: white
+    background-color: #0079d3
+  .auth__link-wrapper
+    font-size: 12px
+    font-family: "Noto Sans", sans-serif
+  .auth__link
+    text-decoration: none
+    text-transform: uppercase
+    font-size: 12px
+    font-weight: 700
+    color: #0079d3
+    font-family: "Noto Sans", sans-serif

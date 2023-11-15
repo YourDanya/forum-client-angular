@@ -9,9 +9,12 @@ import {GoogleSvgComponent} from 'src/app/_common/svg/google/google.component'
 import {CloseSvgComponent} from 'src/app/_common/svg/close/close.component'
 import {CommonModule} from '@angular/common'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
+import {RouterModule} from '@angular/router'
 
 @NgModule({
-    imports: [CommonModule],
+    imports: [
+        CommonModule, RouterModule
+    ],
     declarations: [
         ButtonComponent, SpinnerComponent, InputComponent, ModalComponent, ModalContentComponent,
         SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent
@@ -20,7 +23,6 @@ import {TranslationService} from 'src/app/_common/utils/helpers/translation/tans
         CommonModule, ButtonComponent, SpinnerComponent, InputComponent, ModalComponent, ModalContentComponent,
         SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent
     ],
-    providers: [
-    ]
+    providers: []
 })
 export class SharedModule {}

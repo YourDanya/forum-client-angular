@@ -1,5 +1,5 @@
 <div
-    class="page-auth auth register"
+    class="auth-page-content auth register"
 >
     <ng-container [ngTemplateOutlet]="top"/>
     <ng-container [ngTemplateOutlet]="form"/>
@@ -7,8 +7,8 @@
 </div>
 
 <ng-template #top>
-    <div class="auth__login">
-        {{translation.login}}
+    <div class="auth__title">
+        {{translation.signup}}
     </div>
     <div class="auth__policy">
         {{translation.policy}}
@@ -29,13 +29,21 @@
 </ng-template>
 
 <ng-template #form>
-    <form class="auth__form">
+    <form class="auth__form" type="submit">
         <app-input
             [class]="'auth__input'"
             [name]="'email'"
             [value]="values.email"
             [error]="errors.email"
             [placeholder]="translation.form.email"
+            (changeEvent)="onChange($event)"
+        />
+        <app-input
+            [class]="'auth__input'"
+            [name]="'name'"
+            [value]="values.name"
+            [error]="errors.name"
+            [placeholder]="translation.form.name"
             (changeEvent)="onChange($event)"
         />
         <app-input
@@ -47,8 +55,18 @@
             [placeholder]="translation.form.password"
             (changeEvent)="onChange($event)"
         />
+        <app-input
+            [class]="'auth__input'"
+            [name]="'passwordConfirm'"
+            [value]="values.passwordConfirm"
+            [type]="'password'"
+            [error]="errors.passwordConfirm"
+            [placeholder]="translation.form.passwordConform"
+            (changeEvent)="onChange($event)"
+        />
         <app-button
             [class]="'auth__submit'"
+            (clickEvent)="onSubmit($event)"
         >
             {{translation.signup}}
         </app-button>
@@ -56,9 +74,9 @@
 </ng-template>
 
 <ng-template #bottom>
-    <div class="auth__text">
+    <div class="auth__link-wrapper">
         {{translation.already}}
-        <a class="auth__link" routerLink="auth/login">
+        <a class="auth__link" routerLink="/auth/login">
             {{translation.login}}
         </a>
     </div>
