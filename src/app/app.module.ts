@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core'
+import {importProvidersFrom, NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
 
 import {AppRoutingModule} from './app-routing.module'
@@ -22,6 +22,7 @@ import {CloseSvgComponent} from 'src/app/_common/svg/close/close.component'
 import {AuthModule} from 'src/app/auth/auth.module'
 import {CommonModule} from '@angular/common'
 import {SharedModule} from 'src/app/_common/shared.module'
+import {HttpClient} from '@angular/common/http'
 
 @NgModule({
     declarations: [
@@ -33,6 +34,6 @@ import {SharedModule} from 'src/app/_common/shared.module'
     providers: [
         TestService
     ],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

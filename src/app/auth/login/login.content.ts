@@ -12,6 +12,8 @@ export const dictionary = {
         password: 'password',
         new: 'New?',
         login: 'log in',
+        success: 'Loged in successfully',
+        error: {}
     },
     ru: {
         signup: 'регистрация',
@@ -26,6 +28,8 @@ export const dictionary = {
         password: 'пароль',
         new: 'Впервые?',
         login: 'войти',
+        success: 'Вы успешно вошли',
+        error: {}
     }
 }
 export const initValues = {

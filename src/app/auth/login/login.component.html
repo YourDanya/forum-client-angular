@@ -49,10 +49,17 @@
         />
         <app-button
             [class]="'auth__submit'"
+            [loading]="loading"
             (clickEvent)="onSubmit($event)"
         >
             {{translation.login}}
         </app-button>
+        <div *ngIf="error" class="auth__form-error">
+            {{error}}
+        </div>
+        <div *ngIf="success" class="auth__form-success">
+            {{success}}
+        </div>
     </form>
 </ng-template>
 

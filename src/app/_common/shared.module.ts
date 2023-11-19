@@ -8,12 +8,13 @@ import {SearchSvgComponent} from 'src/app/_common/svg/search/search.component'
 import {GoogleSvgComponent} from 'src/app/_common/svg/google/google.component'
 import {CloseSvgComponent} from 'src/app/_common/svg/close/close.component'
 import {CommonModule} from '@angular/common'
-import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
 import {RouterModule} from '@angular/router'
+import {HttpClientModule} from '@angular/common/http'
+import {httpInterceptorsProviders} from 'src/app/_common/api/interceptors/interceptors'
 
 @NgModule({
     imports: [
-        CommonModule, RouterModule
+        CommonModule, RouterModule, HttpClientModule
     ],
     declarations: [
         ButtonComponent, SpinnerComponent, InputComponent, ModalComponent, ModalContentComponent,
@@ -23,6 +24,8 @@ import {RouterModule} from '@angular/router'
         CommonModule, ButtonComponent, SpinnerComponent, InputComponent, ModalComponent, ModalContentComponent,
         SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent
     ],
-    providers: []
+    providers: [
+        httpInterceptorsProviders
+    ]
 })
 export class SharedModule {}

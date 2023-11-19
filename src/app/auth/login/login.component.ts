@@ -7,6 +7,8 @@ import {InputErrors} from 'src/app/_common/types/form/input-errors.type'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
 import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import inputChange from 'src/app/_common/utils/form/input-change/input-change'
+import {UserApiService} from 'src/app/_common/api/user/user-api.service'
+import {User} from 'src/app/_common/types/user/user.type'
 
 @Component({
     selector: 'app-login',
@@ -17,13 +19,16 @@ import inputChange from 'src/app/_common/utils/form/input-change/input-change'
 })
 export class LoginComponent {
     translation: Translation<typeof dictionary>
-    
+
     values = {...initValues}
     errors: InputErrors<typeof initErrors> = {...initErrors}
-
+    loading = false
+    error = ''
+    success = ''
     constructor(
         private translationService: TranslationService,
-        private validationService: ValidationService<typeof initValues>
+        private validationService: ValidationService<typeof initValues>,
+        private userApiService: UserApiService
     ) {
         this.translation = this.translationService.translate(dictionary)
 
@@ -43,7 +48,26 @@ export class LoginComponent {
         this.validationService.validateAll()
 
         if (this.validationService.errorsCount === 0) {
-            console.log('submitting')
+            this.login()
         }
+    }
+
+    login() {
+        this.loading = true
+        this.userApiService.login(this.values).subscribe({
+            next: this.loginSuccess,
+            error: this.loginError.bind(this)
+        })
+    }
+
+    loginSuccess(data: {user: User}) {
+        this.loading = false
+        this.success = this.translation.success
+    }
+
+    loginError(error: {message: string, code: number}) {
+        this.loading = false
+        this.error = error.message
+        console.log('error', error)
     }
 }

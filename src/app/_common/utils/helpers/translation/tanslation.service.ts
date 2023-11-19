@@ -8,7 +8,7 @@ import {Lang} from 'src/app/_common/types/translation/lang.type'
 export class TranslationService {
     constructor(private route: ActivatedRoute) {}
 
-    translate<T extends Record<Lang, object>>(dictionary: T): T[Lang] {
+    translate<T extends Record<Lang, object | string>>(dictionary: T): T[Lang] {
         const lang = <Lang> this.route.root.firstChild?.snapshot.paramMap.get('lang')
         return dictionary[lang]
     }
