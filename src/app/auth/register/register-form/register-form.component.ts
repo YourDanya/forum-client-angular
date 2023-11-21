@@ -1,30 +1,33 @@
-import {Component} from '@angular/core'
+import {Component, EventEmitter, Input, Output} from '@angular/core'
 import {ViewEncapsulation} from '@angular/core'
-import {ValidationService} from 'src/app/_common/utils/form/validation/validation.service'
 import {Translation} from 'src/app/_common/types/translation/translation.types'
-import {dictionary, initErrors, initValues, validations} from 'src/app/auth/login/login.content'
-import {InputErrors} from 'src/app/_common/types/form/input-errors.type'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
+import {dictionary, initErrors, initValues, validations} from 'src/app/auth/register/register-form/register-form.content'
+import {InputErrors} from 'src/app/_common/types/form/input-errors.type'
+import {ValidationService} from 'src/app/_common/utils/form/validation/validation.service'
 import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import inputChange from 'src/app/_common/utils/form/input-change/input-change'
 import {UserApiService} from 'src/app/_common/api/user/user-api.service'
-import {User} from 'src/app/_common/types/user/user.type'
 
 @Component({
-    selector: 'app-login',
-    templateUrl: 'login.component.html',
-    styleUrls: ['login.styles.sass'],
+    selector: 'app-register-form',
+    templateUrl: 'register-form.component.html',
+    styleUrls: ['./register-form.styles.sass'],
     encapsulation: ViewEncapsulation.None,
-    providers: [ValidationService]
+    providers: [ValidationService],
 })
-export class LoginComponent {
+export class RegisterFormComponent {
     translation: Translation<typeof dictionary>
 
     values = {...initValues}
     errors: InputErrors<typeof initErrors> = {...initErrors}
-    loading = false
-    error = ''
-    success = ''
+
+    @Input()
+    shouldConfirm: boolean
+
+    @Output()
+    shouldConfirmChange = new EventEmitter<true>()
+
     constructor(
         private translationService: TranslationService,
         private validationService: ValidationService<typeof initValues>,
@@ -47,26 +50,22 @@ export class LoginComponent {
         event.preventDefault()
         this.validationService.validateAll()
 
-        if (this.validationService.errorsCount === 0) {
-            this.login()
+        if (this.validationService.errorsCount !== 0) {
+            return
         }
-    }
 
-    login() {
-        this.loading = true
-        this.userApiService.login(this.values).subscribe({
-            next: this.loginSuccess,
-            error: this.loginError.bind(this)
+        this.userApiService.register(this.values).subscribe({
+            next: this.onRegisterSuccess.bind(this),
+            error: this.onRegisterError.bind(this)
         })
     }
-    loginSuccess(data: {user: User}) {
-        this.loading = false
-        this.success = this.translation.success
+
+    onRegisterSuccess () {
+        this.shouldConfirm = true
+        this.shouldConfirmChange.emit(this.shouldConfirm)
     }
 
-    loginError(error: {message: string, code: number}) {
-        this.loading = false
-        this.error = error.message
-        console.log('error', error)
+    onRegisterError() {
+        this.shouldConfirm = false
     }
 }

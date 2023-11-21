@@ -14,4 +14,12 @@ export class UserApiService {
     register(data: {email: string, name: string, password: string, passwordConfirm: string}) {
         return this.http.post(`${serverUrlRoot}/user/register`, data)
     }
+
+    sendRegisterCode() {
+        return this.http.get(`${serverUrlRoot}/user/send-register-code`)
+    }
+
+    confirmRegisterEmail(data: {code: string}) {
+        return this.http.post(`${serverUrlRoot}/user/cofirm-register-email`, data)
+    }
 }

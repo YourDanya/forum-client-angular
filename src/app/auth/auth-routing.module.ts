@@ -1,6 +1,6 @@
 import {RouterModule, Routes} from '@angular/router'
 import {LoginComponent} from 'src/app/auth/login/login.component'
-import {RegisterComponent} from 'src/app/auth/register/register.component'
+import {RegisterFormComponent} from 'src/app/auth/register/register-form/register-form.component'
 import {NgModule} from '@angular/core'
 import {ResetComponent} from 'src/app/auth/reset/reset.component'
 import {ForgotComponent} from 'src/app/auth/forgot/forgot.component'
@@ -12,7 +12,7 @@ export const authRoutes: Routes = [
         component: LayoutComponent,
         children: [
             {
-                path: 'register', component: RegisterComponent
+                path: 'register', component: RegisterFormComponent
             },
             {
                 path: 'login', component: LoginComponent

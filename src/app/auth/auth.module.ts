@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core'
 import {LoginComponent} from 'src/app/auth/login/login.component'
-import {RegisterComponent} from 'src/app/auth/register/register.component'
+import {RegisterFormComponent} from 'src/app/auth/register/register-form/register-form.component'
 import {AuthRoutingModule} from 'src/app/auth/auth-routing.module'
 import {ForgotComponent} from 'src/app/auth/forgot/forgot.component'
 import {ResetComponent} from 'src/app/auth/reset/reset.component'
@@ -9,6 +9,8 @@ import {BrowserModule} from '@angular/platform-browser'
 import {CommonModule} from '@angular/common'
 import {SharedModule} from 'src/app/_common/shared.module'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
+import {RegisterComponent} from 'src/app/auth/register/register.component'
+import {ConfirmComponent} from 'src/app/auth/register/confirm/confirm.component'
 
 @NgModule({
     imports: [
@@ -16,7 +18,8 @@ import {TranslationService} from 'src/app/_common/utils/helpers/translation/tans
         AuthRoutingModule
     ],
     declarations: [
-        LayoutComponent, LoginComponent, RegisterComponent, ForgotComponent, ResetComponent
+        LayoutComponent, LoginComponent, RegisterComponent, RegisterFormComponent, ConfirmComponent,
+        ForgotComponent, ResetComponent
     ]
 })
 export class AuthModule{}

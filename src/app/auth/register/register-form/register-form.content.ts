@@ -45,7 +45,7 @@ export const initErrors = {
 
 export const validations = {
     email: {minLength: 5, isEmail: true, maxLength: 50},
-    name: {minLength: 5, maxLength: 50},
+    name: {minLength: 3, maxLength: 50},
     password: {minLength: 5, maxLength: 50},
     passwordConfirm: {minLength: 5, maxLength: 50}
 }
