@@ -21,6 +21,7 @@ export class RegisterFormComponent {
 
     values = {...initValues}
     errors: InputErrors<typeof initErrors> = {...initErrors}
+    loading = false
 
     @Input()
     shouldConfirm: boolean
@@ -54,6 +55,8 @@ export class RegisterFormComponent {
             return
         }
 
+        this.loading = true
+
         this.userApiService.register(this.values).subscribe({
             next: this.onRegisterSuccess.bind(this),
             error: this.onRegisterError.bind(this)
@@ -61,11 +64,12 @@ export class RegisterFormComponent {
     }
 
     onRegisterSuccess () {
+        this.loading = false
         this.shouldConfirm = true
         this.shouldConfirmChange.emit(this.shouldConfirm)
     }
 
     onRegisterError() {
-        this.shouldConfirm = false
+        this.loading = false
     }
 }

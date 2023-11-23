@@ -15,10 +15,13 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     handleError (error: HttpErrorResponse) {
-        console.log('error', error)
         if (!error.error) {
             return throwError(error)
         }
+        if (error.status.toString()[0] === '4') {
+            return throwError(error.error)
+        }
+
         const translation = this.translationSerice.translate(dictionary)
         return throwError(() => new Error(translation.message))
     }

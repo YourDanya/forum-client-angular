@@ -4,10 +4,13 @@ import {ValidationService} from 'src/app/_common/utils/form/validation/validatio
 @Component({
     selector: 'app-register',
     templateUrl: 'register.component.html',
-    styleUrls: ['./register-form.styles.sass'],
     encapsulation: ViewEncapsulation.None,
     providers: [ValidationService],
 })
 export class RegisterComponent {
     shouldConfirm = false
+
+    ngOnChanges() {
+        console.log('shouldConfirm', this.shouldConfirm)
+    }
 }
