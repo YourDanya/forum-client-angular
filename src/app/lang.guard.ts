@@ -5,8 +5,6 @@ import {Router} from '@angular/router'
 export const canMatch = (_: Route, segments: UrlSegment[]) => {
     const router = inject(Router)
 
-    console.log('segments', segments)
-
     if (segments[0]?.path !== 'en' && segments[0]?.path !== 'ru') {
         const newUrl = `/en/${segments.join('/')}`
         router.navigate([newUrl])

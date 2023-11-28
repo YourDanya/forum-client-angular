@@ -56,25 +56,28 @@
     background-color: white
   .input
     margin-bottom: 12px
-  .input__container
+  .input__field
     padding: 22px 12px 10px
     background-color: #fcfcfb
     border-radius: 4px
     border: 1px solid rgba(0, 0, 0, 0.1)
-    margin-bottom: 5px
+    cursor: text
   .input__wrapper
-    display: contents
+    margin-bottom: 5px
   .input__placeholder
+    left: 12px
+    top: 50%
+    font-size: 10px
+    transform: translateY(-50%)
     text-transform: uppercase
     color: #a5a4a4
-    font-size: 10px
     font-weight: 700
     font-family: IBMPlexSans, sans-serif
     transition: 0.2s all ease-in-out
   .input--focused, .input--filled
     .input__placeholder
-      display: block
       transform: translateY(-12px)
+      display: block
       font-size: 8px
   .input__error
     color: red
@@ -102,7 +105,5 @@
   .auth__form-error
     color: red
     font-size: 11px
-    margin-bottom: 5px
   .auth__form-success
     font-size: 11px
-    margin-bottom: 5px

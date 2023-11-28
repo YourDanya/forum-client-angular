@@ -1,17 +1,38 @@
-<div class="auth-page-content auth confirm-register">
+<div class="auth-page-content auth confirm-register confirm">
+    <div class="auth__title">
+        {{translation.title}}
+    </div>
     <form class="auth__form" type="submit">
         <app-input
+            focusInput
+            [placeholder]="translation.code"
+            [value]="values.code"
             [class]="'auth__input'"
+            [name]="'code'"
+            [error]="errors.code"
+            (changeEvent)="onChange($event)"
         />
-        <app-button
-            [class]="'auth__button'"
-        >
-            {{translation.resend}}
-        </app-button>
-        <app-button
-            [class]="'auth__button'"
-        >
-            {{translation.submit}}
-        </app-button>
+        <div class="confirm__buttons">
+            <app-button
+                [class]="'auth__submit'"
+                [loading]="confirmLoading"
+                (clickEvent)="onConfirm($event)"
+            >
+                {{translation.submit}}
+            </app-button>
+            <app-button
+                [class]="'confirm__resend'"
+                [loading]="resendLoading"
+                (clickEvent)="onResend($event)"
+            >
+                {{translation.resend}}
+            </app-button>
+        </div>
+        <div class="auth__form-error">
+            {{confirmError}}
+        </div>
+        <div class="auth__form-success">
+            {{confirmSuccess}}
+        </div>
     </form>
 </div>

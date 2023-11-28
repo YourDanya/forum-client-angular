@@ -11,15 +11,16 @@ import {SharedModule} from 'src/app/_common/shared.module'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
 import {RegisterComponent} from 'src/app/auth/register/register.component'
 import {ConfirmComponent} from 'src/app/auth/register/confirm/confirm.component'
+import {FocusDirective} from 'src/app/auth/_directives/focus/focus.directive'
 
 @NgModule({
     imports: [
-        SharedModule,
-        AuthRoutingModule
+        SharedModule, AuthRoutingModule
     ],
+    exports: [],
     declarations: [
         LayoutComponent, LoginComponent, RegisterComponent, RegisterFormComponent, ConfirmComponent,
-        ForgotComponent, ResetComponent
+        ForgotComponent, FocusDirective
     ]
 })
 export class AuthModule{}

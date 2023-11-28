@@ -8,12 +8,12 @@ import {InputValues} from 'src/app/_common/types/form/input-values.type'
 })
 export class Validator {
     validateOne(params: {
-        validations: ValidationValue, name: string, values: InputValues, translations?: Record<string, string>, lang: Lang
+        validations: ValidationValue, value: string | number, lang: Lang
     }) {
-        let {validations, name, values, translations, lang} = params
+        let {validations, value, lang} = params
 
         let error = ''
-        const value = values[name]
+
         loop: for (let valName in validations) {
             let valValue = validations[valName]
             switch (valName) {
@@ -92,18 +92,6 @@ export class Validator {
                         error = {
                             en: 'Enter a valid number.',
                             ru: 'Введите правильный номер.'
-                        }[lang]
-                        break loop
-                    }
-                    break
-                }
-                case ('equalToField') : {
-                    const otherName = valValue as string
-                    translations = translations as Record<string, string>
-                    if (value !== values[otherName]) {
-                        error = {
-                            en: `${translations[name]} and ${translations[otherName]} do not match.`,
-                            ru: `${translations[name]} и ${translations[otherName]} не воспадают.`
                         }[lang]
                         break loop
                     }

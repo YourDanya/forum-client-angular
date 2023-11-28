@@ -46,7 +46,6 @@ export class RegisterFormComponent {
         this.values[name] = value
         this.validationService.validateOne({name})
     }
-
     onSubmit(event: Event) {
         event.preventDefault()
         this.validationService.validateAll()

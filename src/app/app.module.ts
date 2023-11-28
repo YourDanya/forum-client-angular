@@ -23,6 +23,7 @@ import {AuthModule} from 'src/app/auth/auth.module'
 import {CommonModule} from '@angular/common'
 import {SharedModule} from 'src/app/_common/shared.module'
 import {HttpClient} from '@angular/common/http'
+import {FocusDirective} from 'src/app/auth/_directives/focus/focus.directive'
 
 @NgModule({
     declarations: [

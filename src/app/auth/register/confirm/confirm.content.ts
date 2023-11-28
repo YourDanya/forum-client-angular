@@ -1,22 +1,22 @@
 export const dictionary = {
     en: {
+        title: 'confirm register',
         resend: 'send code',
         code: 'code',
-        submit: 'submit',
-        resendCodeError: {},
-        confirmEmail: {
-            success: 'Your email confirmed successfully!',
-            error: {}
-        },
+        submit: 'submit'
     },
     ru: {
+        title: 'подтвердить регистрацию',
         resend: 'відправити код',
         code: 'код',
-        submit: 'отправить',
-        resendCodeError: {},
-        confirmEmail: {
-            success: 'Ваша почта успешно подтверждена!',
-            error: {}
-        }
+        submit: 'отправить'
     }
+}
+
+export const initValues = {
+    code: ''
+}
+
+export const validations = {
+    code: {minLength: 5}
 }

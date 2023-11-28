@@ -1,4 +1,24 @@
 auth-confirm-register
   display: contents
 
-.auth.confirm-register
+.auth.confirm-register.confirm
+  .auth__title
+    margin-bottom: 20px
+  .auth__input
+    margin-bottom: 20px
+  .confirm__buttons
+    display: grid
+    grid-template-columns: 1fr 70px
+  .confirm__resend
+    font-size: 12px
+    color: #8a8c8e
+    justify-self: end
+    .spinner__content
+      border: 3px solid #8a8c8e
+      border-top-color: transparent
+  .button--loading
+    justify-self: center
+  .auth__form-success
+    margin-top: 5px
+  .auth__form-error
+    margin-top: 5px

@@ -5,15 +5,6 @@
     [class.input--focused]="focused"
     [class.input--filled]="value"
 >
-    <div class="input__container">
-        <ng-container [ngTemplateOutlet]="inputWrapper"/>
-    </div>
-    <div *ngIf="error" class="input__error">
-        {{error}}
-    </div>
-</div>
-
-<ng-template #inputWrapper>
     <div class="input__wrapper">
         <textarea
             *ngIf="type === 'textarea'"
@@ -36,4 +27,7 @@
             {{placeholder}}
         </div>
     </div>
-</ng-template>
+    <div *ngIf="error" class="input__error">
+        {{error}}
+    </div>
+</div>
