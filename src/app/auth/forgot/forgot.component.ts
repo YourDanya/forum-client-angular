@@ -41,7 +41,7 @@ export class ForgotComponent {
         this.validationService.validateAll()
 
         if (this.validationService.errorsCount === 0) {
-            console.log('submitting')
+
         }
     }
 }

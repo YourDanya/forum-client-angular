@@ -41,6 +41,7 @@ export class ConfirmComponent {
     onChange(event: InputEvent) {
         const {value, name} = inputChange<{ code: string }>(event)
         this.values[name] = value
+        this.validationService.validateOne({name})
     }
 
     onResend(event: Event) {
@@ -79,14 +80,15 @@ export class ConfirmComponent {
         })
     }
 
-    onConfirmError = (error: HttpErrorResponse) => {
+    onConfirmError = (error: Error) => {
         this.confirmLoading = false
-        this.confirmError = error.error.message
+        this.confirmError = error.message
     }
 
     onConfirmSuccss = (res: {message: string}) => {
         this.confirmLoading = false
         this.confirmSuccess = res.message
+        this.confirmError = ''
     }
 
     ngOnInit() {

@@ -28,9 +28,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
         if (error.status.toString()[0] === '4') {
             error.error.message = this.translationSerice.translate(error.error.message)
-            return throwError(error)
+            return throwError(error.error)
         }
-
         const translation = this.translationSerice.translate(dictionary)
         return throwError(() => new Error(translation.message))
     }

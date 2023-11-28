@@ -56,17 +56,18 @@ export class LoginComponent {
         this.loading = true
         this.userApiService.login(this.values).subscribe({
             next: this.loginSuccess,
-            error: this.loginError.bind(this)
+            error: this.loginError
         })
     }
-    loginSuccess(data: {user: User}) {
+    loginSuccess = (data: {user: User, message: string}) => {
         this.loading = false
-        this.success = this.translation.success
+        this.success = data.message
+        this.error = ''
     }
 
-    loginError(error: {message: string, code: number}) {
+    loginError = (error: Error) => {
         this.loading = false
         this.error = error.message
-        console.log('error', error)
+        this.success = ''
     }
 }
