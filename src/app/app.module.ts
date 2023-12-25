@@ -1,40 +1,21 @@
-import {importProvidersFrom, NgModule} from '@angular/core'
+import { NgModule} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser'
 
 import {AppRoutingModule} from './app-routing.module'
 import {AppComponent} from './app.component'
 import {NavComponent} from 'src/app/_components/_layout/nav/nav.component'
-import {ButtonComponent} from 'src/app/_common/components/button/button.comonent'
-import {InputComponent} from 'src/app/_common/components/input/input.component'
-import {SpinnerComponent} from 'src/app/_common/components/spinner/spinner.component'
 import {LayoutComponent} from 'src/app/_components/_layout/layout.component'
-import {TestComponent} from 'src/app/test/test.component'
-import {FirstComponent} from 'src/app/test/first/first.component'
-import {SecondComponent} from 'src/app/test/second/second.component'
-import {TestService} from 'src/app/test/test.service'
-import {SvgComponent} from 'src/app/_common/components/svg/svg.component'
-import {SearchSvgComponent} from 'src/app/_common/svg/search/search.component'
-import {ModalComponent} from 'src/app/_common/components/modal/modal.component'
-import {ModalContentComponent} from 'src/app/_common/components/modal-content/modal-content.component'
 import {AuthComponent} from 'src/app/_components/_layout/nav/auth/auth.component'
-import {GoogleSvgComponent} from 'src/app/_common/svg/google/google.component'
-import {CloseSvgComponent} from 'src/app/_common/svg/close/close.component'
-import {AuthModule} from 'src/app/auth/auth.module'
-import {CommonModule} from '@angular/common'
 import {SharedModule} from 'src/app/_common/shared.module'
-import {HttpClient} from '@angular/common/http'
-import {FocusDirective} from 'src/app/auth/_directives/focus/focus.directive'
 
 @NgModule({
     declarations: [
-        AppComponent, LayoutComponent, NavComponent, AuthComponent, TestComponent, FirstComponent, SecondComponent
+        AppComponent, LayoutComponent, NavComponent, AuthComponent,
     ],
     imports: [
         BrowserModule, SharedModule, AppRoutingModule
     ],
-    providers: [
-        TestService
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

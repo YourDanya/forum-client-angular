@@ -26,19 +26,24 @@
   width: 600px
   .search__button
     position: absolute
-    top: 50%
-    transform: translateY(-50%)
+    top: 12px
     left: 16px
+    z-index: 10
   .search__icon
     display: block
-  .input__container
+  .input__placeholder
+    color: #757e85
+    top: 14px
+    left: 40px
+  .input__field
+    color: #0F1A1C
     background-color: #eaedef
     padding: 12px 40px
     border-radius: 50px
-  .input__placeholder
-    color: #757e85
-  .input__field
-    color: #0F1A1C
+  .input--focused .input__placeholder
+    display: block
+  .input--filled .input__placeholder
+    display: none
 
 @media (max-width: 1200px)
   .nav__title

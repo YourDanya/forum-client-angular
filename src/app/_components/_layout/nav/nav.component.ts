@@ -1,10 +1,10 @@
-import {Component, ElementRef, ViewChild} from '@angular/core'
+import {Component} from '@angular/core'
 import {ViewEncapsulation} from '@angular/core'
 import {dictionary} from 'src/app/_components/_layout/nav/nav.content'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
 import {Translation} from 'src/app/_common/types/translation/translation.types'
 import {InputEvent} from 'src/app/_common/types/form/input-event.type'
-import {ActivatedRoute, NavigationStart, Router} from '@angular/router'
+import {NavigationStart, Router} from '@angular/router'
 import {filter, map} from 'rxjs'
 
 @Component({

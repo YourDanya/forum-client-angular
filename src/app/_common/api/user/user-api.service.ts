@@ -25,4 +25,12 @@ export class UserApiService {
     confirmRegisterEmail(data: {code: string}) {
         return this.http.post<{message: string}>(`${serverUrlRoot}/user/confirm-register-email`, data)
     }
+
+    forgorPassword(data: {email: string}) {
+        return this.http.post<{message: string}>(`${serverUrlRoot}/user/forgot-password`, data)
+    }
+
+    resetPassword(data: {token: string}) {
+        return this.http.post<{message: string}>(`${serverUrlRoot}/user/reset-password`, data)
+    }
 }

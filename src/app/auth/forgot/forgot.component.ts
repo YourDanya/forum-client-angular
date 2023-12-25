@@ -18,6 +18,7 @@ export class ForgotComponent {
 
     values = {...initValues}
     errors: InputErrors<typeof initErrors> = {...initErrors}
+    forgotLoading = false
 
     constructor(
         private translationService: TranslationService,
@@ -38,10 +39,27 @@ export class ForgotComponent {
 
     onSubmit(event: Event) {
         event.preventDefault()
+
+        if (this.forgotLoading) {
+            return
+        }
+
         this.validationService.validateAll()
 
         if (this.validationService.errorsCount === 0) {
+            return
+        }
+
+        if (this.validationService.errorsCount) {
 
         }
+    }
+
+    onForgetSuccess () {
+
+    }
+
+    onForgetError () {
+
     }
 }
