@@ -22,13 +22,13 @@ export class RegisterFormComponent {
     values = {...initValues}
     errors: InputErrors<typeof initErrors> = {...initErrors}
     loading = false
+    error = ''
 
     @Input()
     shouldConfirm: boolean
 
     @Output()
     shouldConfirmChange = new EventEmitter<true>()
-
     constructor(
         private translationService: TranslationService,
         private validationService: ValidationService<typeof initValues>,
@@ -45,10 +45,27 @@ export class RegisterFormComponent {
         const {name, value} = inputChange<typeof initValues>(event)
         this.values[name] = value
         this.validationService.validateOne({name})
+
+        if ((name === 'password' || name === 'passwordConfirm')) {
+            this.checkPasswordMatch()
+        }
+    }
+
+    checkPasswordMatch() {
+        if (this.errors.password && this.errors.passwordConfirm) {
+            return
+        }
+
+        if (this.values.password !== this.values.passwordConfirm) {
+            this.errors.password = this.translation.noMatch
+        } else {
+            this.errors.password = ''
+        }
     }
     onSubmit(event: Event) {
         event.preventDefault()
         this.validationService.validateAll()
+        this.checkPasswordMatch()
 
         if (this.validationService.errorsCount !== 0) {
             return
@@ -57,18 +74,22 @@ export class RegisterFormComponent {
         this.loading = true
 
         this.userApiService.register(this.values).subscribe({
-            next: this.onRegisterSuccess.bind(this),
-            error: this.onRegisterError.bind(this)
+            next: this.onRegisterSuccess,
+            error: this.onRegisterError
         })
     }
 
-    onRegisterSuccess () {
+    onRegisterSuccess = () => {
         this.loading = false
         this.shouldConfirm = true
         this.shouldConfirmChange.emit(this.shouldConfirm)
     }
 
-    onRegisterError() {
+    onRegisterError = (error: Error) => {
         this.loading = false
+        this.error = error.message
     }
 }
+
+
+

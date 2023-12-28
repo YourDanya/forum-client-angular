@@ -31,7 +31,7 @@
 </ng-template>
 
 <ng-template #form>
-    <form class="auth__form">
+    <form class="auth__form" type="submit" (submit)="onSubmit($event)">
         <app-input
             [class]="'auth__input'"
             [name]="'email'"
@@ -49,6 +49,7 @@
             [placeholder]="translation.form.password"
             (changeEvent)="onChange($event)"
         />
+        <input type="submit" (submit)="onSubmit($event)" style="display: none"/>
     </form>
 </ng-template>
 
@@ -68,7 +69,12 @@
     </div>
     <app-button
         [class]="'auth__submit' + (submitActive ? ' auth__submit--active' : '')"
+        [loading]="loading"
+        (clickEvent)="onSubmit($event)"
     >
         {{translation.login}}
     </app-button>
+    <div *ngIf="error" class="auth__error">
+        {{error}}
+    </div>
 </ng-template>

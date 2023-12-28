@@ -19,7 +19,7 @@ export class UserApiService {
     }
 
     sendRegisterCode() {
-        return this.http.get<{message: string}>(`${serverUrlRoot}/user/send-register-code`)
+        return this.http.get<{message: string, timer: number}>(`${serverUrlRoot}/user/send-register-code`)
     }
 
     confirmRegisterEmail(data: {code: string}) {

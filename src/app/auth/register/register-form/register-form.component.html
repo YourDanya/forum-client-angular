@@ -71,6 +71,9 @@
         >
             {{translation.signup}}
         </app-button>
+        <div *ngIf="error" class="auth__form-error">
+            {{error}}
+        </div>
     </form>
 </ng-template>
 

@@ -25,7 +25,12 @@
                 [loading]="resendLoading"
                 (clickEvent)="onResend($event)"
             >
-                {{translation.resend}}
+                <div>
+                    {{translation.resend}}
+                    <div *ngIf="!canResend">
+                        in {{time}}
+                    </div>
+                </div>
             </app-button>
         </div>
         <div class="auth__form-error">

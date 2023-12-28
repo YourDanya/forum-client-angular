@@ -10,6 +10,8 @@ import {Lang} from 'src/app/_common/types/translation/lang.type'
 import inputChange from 'src/app/_common/utils/form/input-change/input-change'
 import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import {InputErrors} from 'src/app/_common/types/form/input-errors.type'
+import {User} from 'src/app/_common/types/user/user.type'
+import {UserApiService} from 'src/app/_common/api/user/user-api.service'
 
 @Component({
     selector: 'app-auth',
@@ -27,12 +29,17 @@ export class AuthComponent {
     translation: Translation<typeof dictionary>
     submitActive = false
 
+    loading = false
+    error = ''
+    success = ''
+
     @Output()
     closeEvent = new EventEmitter()
 
     constructor(
         private route: ActivatedRoute,
-        private validationService: ValidationService<typeof initValues>
+        private validationService: ValidationService<typeof initValues>,
+        private userApiService: UserApiService
     ) {
         const lang = <Lang> this.route.snapshot.paramMap.get('lang')
         this.translation = dictionary[lang]
@@ -52,14 +59,39 @@ export class AuthComponent {
 
         this.submitActive = this.validationService.errorsCount === 0
     }
+    onClose () {
+        this.closeEvent.emit()
+        this.userApiService.login(this.values).subscribe({
+            next: this.loginSuccess,
+            error: this.loginError
+        })
+    }
 
-    onSubmit () {
+    onSubmit (event: Event) {
+        event.preventDefault()
+
         if (this.submitActive) {
-            console.log('submitting')
+            this.login()
         }
     }
 
-    onClose () {
-        this.closeEvent.emit()
+    login() {
+        this.loading = true
+        this.userApiService.login(this.values).subscribe({
+            next: this.loginSuccess,
+            error: this.loginError
+        })
+    }
+
+    loginSuccess = (data: {user: User, message: string}) => {
+        this.loading = false
+        this.success = data.message
+        this.error = ''
+    }
+
+    loginError = (error: Error) => {
+        this.loading = false
+        this.error = error.message
+        this.success = ''
     }
 }

@@ -6,7 +6,6 @@ import {dictionary, initValues, validations} from 'src/app/auth/register/confirm
 import {Translation} from 'src/app/_common/types/translation/translation.types'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
 import {UserApiService} from 'src/app/_common/api/user/user-api.service'
-import {HttpErrorResponse} from '@angular/common/http'
 import {Timer} from 'src/app/_common/utils/helpers/timer/timer.util'
 
 @Component({
@@ -25,6 +24,8 @@ export class ConfirmComponent {
     confirmLoading = false
     confirmError = ''
     confirmSuccess = ''
+    canResend = true
+    time: string
 
     constructor(
         public translationService: TranslationService,
@@ -46,18 +47,25 @@ export class ConfirmComponent {
 
     onResend(event: Event) {
         event.preventDefault()
-        if (this.resendLoading) {
+        this.send()
+    }
+
+    send = () => {
+        if (this.resendLoading || !this.canResend) {
             return
         }
         this.resendLoading = true
+
         this.userApiService.sendRegisterCode().subscribe({
             error: this.onResendError,
             next: this.onResendSucces
         })
     }
 
-    onResendSucces = () =>  {
+    onResendSucces = (data: {message: string, timer: number}) =>  {
         this.resendLoading = false
+        this.timer.start(data.timer)
+        this.canResend = false
     }
 
     onResendError = () => {
@@ -92,6 +100,13 @@ export class ConfirmComponent {
     }
 
     ngOnInit() {
-        this.timer.timer$.subscribe((value) => console.log('value', value))
+        this.timer.timer$.subscribe((time) => {
+            if (time === '00:00') {
+                this.canResend = true
+            }
+            this.time = time
+        })
+
+        // this.send()
     }
 }

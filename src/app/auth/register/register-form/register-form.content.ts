@@ -10,6 +10,7 @@ export const dictionary = {
             password: 'password',
             passwordConform: 'password confirm'
         },
+        noMatch: 'password and password confirm do not match',
         already: 'Alredy have an account?',
         login: 'log in',
     },
@@ -24,6 +25,7 @@ export const dictionary = {
             password: 'пароль',
             passwordConform: 'подтверждение пароля'
         },
+        noMatch: 'пароль и подтверждение пароля не совпадают',
         already: 'Уже есть аккаунт?',
         login: 'войти',
     }

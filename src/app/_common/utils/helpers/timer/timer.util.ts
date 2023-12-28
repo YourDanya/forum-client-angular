@@ -9,7 +9,7 @@ export class Timer {
     subscription: Subscription
 
     time: number
-    step = 5000
+    step = 1000
     timeout = 100000
     timeStamp: number
     resumeTime = 0
