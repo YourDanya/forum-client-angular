@@ -11,6 +11,7 @@ import {CommonModule} from '@angular/common'
 import {RouterModule} from '@angular/router'
 import {HttpClientModule} from '@angular/common/http'
 import {httpInterceptorsProviders} from 'src/app/_common/api/interceptors/interceptors'
+import {AvaSvgComponent} from 'src/app/_common/svg/ava/ava.component'
 
 @NgModule({
     imports: [
@@ -18,11 +19,11 @@ import {httpInterceptorsProviders} from 'src/app/_common/api/interceptors/interc
     ],
     declarations: [
         ButtonComponent, SpinnerComponent, InputComponent, ModalComponent, ModalContentComponent,
-        SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent
+        SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent, AvaSvgComponent
     ],
     exports: [
         CommonModule, ButtonComponent, SpinnerComponent, InputComponent, ModalComponent, ModalContentComponent,
-        SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent
+        SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent, AvaSvgComponent
     ],
     providers: [
         httpInterceptorsProviders

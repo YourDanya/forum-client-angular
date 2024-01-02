@@ -9,6 +9,7 @@ import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import inputChange from 'src/app/_common/utils/form/input-change/input-change'
 import {UserApiService} from 'src/app/_common/api/user/user-api.service'
 import {User} from 'src/app/_common/types/user/user.type'
+import {UserStoreService} from 'src/app/_common/store/user/user-store.service'
 
 @Component({
     selector: 'app-login',

@@ -1,8 +1,12 @@
 export const dictionary = {
     en: {
-        login: 'Log In'
+        login: 'Log In',
+        logout: 'Log Out',
+        profile: 'Profile'
     },
     ru: {
-        login: 'Войти'
+        login: 'Войти',
+        logout: 'Выйти',
+        profile: 'Профиль'
     }
 }

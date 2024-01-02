@@ -38,6 +38,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (!(event instanceof HttpResponse)) {
             return event
         }
+
         event.body.message = this.translationSerice.translate(event.body.message)
         return event
     }

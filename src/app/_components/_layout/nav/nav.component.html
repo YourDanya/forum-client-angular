@@ -3,9 +3,10 @@
         Dan<span class="nav__red-chars">f</span>orum
     </div>
     <ng-container [ngTemplateOutlet]="navSearch"/>
-    <app-button [class]="'nav__login'" (clickEvent)="onLoginClick()">
+    <app-button *ngIf="user === null" [class]="'nav__login'" (clickEvent)="onLoginClick()">
         {{translation.login}}
     </app-button>
+    <ng-container *ngIf="user" [ngTemplateOutlet]="navUser"/>
     <app-modal [active]="modalActive" (closeEvent)="onCloseModal()"/>
     <app-auth [modalActive]="modalActive" (closeEvent)="onCloseModal()"/>
 </nav>
@@ -22,5 +23,28 @@
             [value]="searchValue"
             (changeEvent)="onSearchChange($event)"
         />
+    </div>
+</ng-template>
+
+<ng-template #navUser>
+    <ng-container [ngTemplateOutlet]="userDropdown"/>
+    <ng-container *ngIf="accountMenuShown" [ngTemplateOutlet]="userMenu"/>
+</ng-template>
+
+<ng-template #userDropdown>
+    <app-button class="nav-user-dropdown dropdown" #dropdownButton>
+        <app-ava-svg [class]="'dropdown__ava'"/>
+        <i class="dropdown__chevron"></i>
+    </app-button>
+</ng-template>
+
+<ng-template #userMenu>
+    <div class="nav-user-menu menu">
+        <a class="menu__item" routerLink="/profile">
+            {{translation.profile}}
+        </a>
+        <app-button class="menu__item">
+            {{translation.logout}}
+        </app-button>
     </div>
 </ng-template>

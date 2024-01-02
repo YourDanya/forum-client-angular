@@ -10,6 +10,10 @@ import {Dictionary} from 'src/app/_common/types/translation/dictionary.types'
 export class UserApiService {
     constructor(private http: HttpClient) {}
 
+    getMe() {
+        return this.http.get<{user: User | null}>(`${serverUrlRoot}/user/get-me`)
+    }
+
     login (data: {email: string, password: string}) {
         return this.http.post<{user: User, message: string}>(`${serverUrlRoot}/user/login`, data)
     }
@@ -23,7 +27,7 @@ export class UserApiService {
     }
 
     confirmRegisterEmail(data: {code: string}) {
-        return this.http.post<{message: string}>(`${serverUrlRoot}/user/confirm-register-email`, data)
+        return this.http.post<{message: string, user: User}>(`${serverUrlRoot}/user/confirm-register-email`, data)
     }
 
     forgorPassword(data: {email: string}) {

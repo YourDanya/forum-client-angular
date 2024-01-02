@@ -1,5 +1,24 @@
 <div class="auth-page auth">
     <div class="auth__art"></div>
-    <router-outlet></router-outlet>
+    <ng-container *ngIf="user" [ngTemplateOutlet]="authLogged"/>
+    <app-spinner *ngIf="user === undefined"></app-spinner>
+    <router-outlet *ngIf="user === null"></router-outlet>
 </div>
+
+<ng-template #authLogged>
+    <div class="auth-logged auth">
+        <img class="auth__logo" src="assets/icons/logo.svg"/>
+        <div class="auth__greeting">
+            {{translation.greeting}}
+        </div>
+        <div class="auth__description">
+            {{translation.description}}
+        </div>
+        <div class="auth__redirect">
+            {{translation.redirection}}
+            <a class="auth__link" routerLink="/">{{translation.link}}</a>.
+        </div>
+    </div>
+</ng-template>
+
 

@@ -7,6 +7,10 @@ import {Translation} from 'src/app/_common/types/translation/translation.types'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
 import {UserApiService} from 'src/app/_common/api/user/user-api.service'
 import {Timer} from 'src/app/_common/utils/helpers/timer/timer.util'
+import {User} from 'src/app/_common/types/user/user.type'
+import {UserStoreService} from 'src/app/_common/store/user/user-store.service'
+import {canMatch} from 'src/app/lang.guard'
+import {Location} from '@angular/common'
 
 @Component({
     selector: 'app-confirm-register',
@@ -31,7 +35,9 @@ export class ConfirmComponent {
         public translationService: TranslationService,
         public userApiService: UserApiService,
         public validationService: ValidationService<{code: string}>,
-        public timer: Timer
+        public timer: Timer,
+        public userStoreService: UserStoreService,
+        public location: Location
     ) {
         this.translation = this.translationService.translate(dictionary)
         this.validationService.values = this.values
@@ -93,10 +99,16 @@ export class ConfirmComponent {
         this.confirmError = error.message
     }
 
-    onConfirmSuccss = (res: {message: string}) => {
+    onConfirmSuccss = (res: {message: string, user: User}) => {
         this.confirmLoading = false
         this.confirmSuccess = res.message
         this.confirmError = ''
+
+        this.userStoreService.setUser(res.user)
+
+        const locale = this.location.path().split('/')[1]
+        this.location.go(`${locale}`)
+        // this.location.go('')
     }
 
     ngOnInit() {
