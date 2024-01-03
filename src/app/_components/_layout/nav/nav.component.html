@@ -39,12 +39,23 @@
 </ng-template>
 
 <ng-template #userMenu>
-    <div class="nav-user-menu menu">
-        <a class="menu__item" routerLink="/profile">
-            {{translation.profile}}
+    <div class="nav-user-menu menu" #userMenuDiv>
+        <div class="menu__account">
+            <i class="icon menu__account-icon"></i>
+            <div class="menu__account-text">
+                {{user?.name}}
+            </div>
+        </div>
+        <a class="menu__option menu__profile" routerLink="/profile">
+            <div class="menu__option-text">
+                {{translation.profile}}
+            </div>
         </a>
-        <app-button class="menu__item">
-            {{translation.logout}}
+        <app-button [class]="'menu__option menu__logout'">
+            <i class="icon menu__option-icon"></i>
+            <div class="menu__option-text">
+                {{translation.logout}}
+            </div>
         </app-button>
     </div>
 </ng-template>

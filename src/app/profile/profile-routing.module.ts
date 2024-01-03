@@ -9,7 +9,7 @@ export const profileRoutes: Routes = [
         children: [
             {
                 path: 'settings', component: SettingsComponent
-            }
+            },
         ]
     }
 ]

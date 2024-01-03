@@ -3,6 +3,7 @@
   align-items: center
   justify-content: space-between
   padding: 10px 20px
+  border-bottom: 1px solid #EDEFF1
   .nav__title
     font-family: Vag
     font-size: 20px
@@ -68,6 +69,53 @@
     height: 24px
     background: #d7dfe2
     fill: #fff
+
+.nav-user-menu.menu
+  position: fixed
+  padding: 10px 0
+  top: 70px
+  right: 20px
+  border: 1px solid #EDEFF1
+  width: 250px
+  border-radius: 5px
+  .menu__account
+    padding: 0 20px
+    height: 40px
+    display: flex
+    align-items: center
+  .menu__account-text
+    color: #787c7e
+    font-weight: 500
+  .menu__account-icon
+    color: #787c7e
+    margin-right: 12px
+    &:before
+      content: "\f247"
+  .menu__option
+    display: flex
+    text-decoration: none
+    height: 40px
+    cursor: pointer
+    align-items: center
+    width: 100%
+    justify-content: start
+    &:hover
+      background: rgba(0,0,0,0.04)
+  .menu__option-text
+    font-size: 14px
+    font-weight: 500
+    color: black
+    text-decoration: none
+  .menu__option-icon
+    width: 20px
+    margin-right: 12px
+  .menu__profile
+    padding: 0 20px 0 52px
+  .menu__logout
+    padding: 0 20px
+    .menu__option-icon
+      &:before
+        content: "\f1f3"
 
 @media (max-width: 1200px)
   .nav__title

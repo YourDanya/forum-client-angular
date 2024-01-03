@@ -1,4 +1,4 @@
-import {Component, ElementRef, Host, Renderer2, ViewChild} from '@angular/core'
+import {Component, ElementRef, Host, Renderer2, TemplateRef, ViewChild} from '@angular/core'
 import {ViewEncapsulation} from '@angular/core'
 import {dictionary} from 'src/app/_components/_layout/nav/nav.content'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
@@ -24,6 +24,7 @@ export class NavComponent {
     user: User | null | undefined
 
     @ViewChild('dropdownButton', {read: ElementRef}) button: ElementRef
+    @ViewChild('userMenuDiv') menu: ElementRef
 
     constructor(
         private translationService: TranslationService,
@@ -36,6 +37,10 @@ export class NavComponent {
     }
 
     onDropdownClick = (event: Event) => {
+        if (this.menu && this.menu.nativeElement.contains(event.target)) {
+            return
+        }
+
         if (!this.button.nativeElement.contains(event.target) || this.accountMenuShown) {
             this.accountMenuShown = false
         } else {
