@@ -1,3 +1,14 @@
-<div class="profile-menu menu">
-
+<div class="profile-layout profile" *ngIf="user !== undefined">
+    <div class="profile-menu menu">
+        <a
+            class="menu__item"
+            [class.menu__item--active]="menuActiveLink==='settings'"
+            [routerLink]="['/profile/settings']"
+        >
+            {{translation.settings}}
+        </a>
+    </div>
+    <div class="profile-page">
+        <router-outlet></router-outlet>
+    </div>
 </div>

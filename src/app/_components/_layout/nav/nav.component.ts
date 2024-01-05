@@ -1,4 +1,4 @@
-import {Component, ElementRef, Host, Renderer2, TemplateRef, ViewChild} from '@angular/core'
+import {Component, ElementRef, Renderer2, ViewChild} from '@angular/core'
 import {ViewEncapsulation} from '@angular/core'
 import {dictionary} from 'src/app/_components/_layout/nav/nav.content'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
@@ -38,6 +38,9 @@ export class NavComponent {
 
     onDropdownClick = (event: Event) => {
         if (this.menu && this.menu.nativeElement.contains(event.target)) {
+            if ((event.target as Element).className.includes('menu__option')) {
+                this.accountMenuShown = false
+            }
             return
         }
 

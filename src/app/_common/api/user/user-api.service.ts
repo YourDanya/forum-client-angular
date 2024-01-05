@@ -1,8 +1,7 @@
-import {Inject, Injectable} from '@angular/core'
+import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {serverUrlRoot} from 'src/app/_common/api/config'
 import {User} from 'src/app/_common/types/user/user.type'
-import {Dictionary} from 'src/app/_common/types/translation/dictionary.types'
 
 @Injectable({
     providedIn: 'root'
@@ -36,5 +35,17 @@ export class UserApiService {
 
     resetPassword(data: {token: string}) {
         return this.http.post<{message: string}>(`${serverUrlRoot}/user/reset-password`, data)
+    }
+
+    changeEmail(data: {email: string}) {
+        return this.http.post<{message: string}>(`${serverUrlRoot}/user/change-email`, data)
+    }
+
+    sendChangeEmailCode(data: {email: string}) {
+        return this.http.post<{message: string}>(`${serverUrlRoot}/user/send-change-email-code`, data)
+    }
+
+    confirmChangeEmail(data: {email: string}) {
+        return this.http.post<{message: string}>(`${serverUrlRoot}/user/confirm-change-email`, data)
     }
 }
