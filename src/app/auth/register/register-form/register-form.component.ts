@@ -26,7 +26,6 @@ export class RegisterFormComponent {
 
     @Input()
     shouldConfirm: boolean
-
     @Output()
     shouldConfirmChange = new EventEmitter<true>()
     constructor(

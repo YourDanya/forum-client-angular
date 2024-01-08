@@ -3,38 +3,7 @@
     [active]="modalActive"
     (closeEvent)="onClose()"
 >
-    <ng-container [ngTemplateOutlet]="changeForm"/>
-    <ng-container [ngTemplateOutlet]="confirmForm"/>
+    <app-profile-change-email *ngIf="!shouldConfirm" [(shouldConfirm)]="shouldConfirm"/>
+    <app-profile-confirm-email *ngIf="shouldConfirm"/>
 </app-modal-content>
 
-<ng-template #changeForm>
-    <form class="profile-update-email-form form">
-        <app-input
-            [class]="'form__input'"
-            [name]="'email'"
-            [value]="emailChanger.value"
-            [error]="emailChanger.validateError"
-            [placeholder]="translation.email"
-            (changeEvent)="emailChanger.onChange($event)"
-        />
-        <div class="form__error" *ngIf="emailChanger.serverError">
-            {{emailChanger.serverError}}
-        </div>
-    </form>
-</ng-template>
-
-<ng-template #confirmForm>
-    <form class="profile-update-email-form form">
-        <app-input
-            [class]="'form__input'"
-            [name]="'code'"
-            [value]="codeSender.value"
-            [error]="codeSender.validateError"
-            [placeholder]="translation.code"
-            (changeEvent)="codeSender.onChange($event)"
-        />
-        <div class="form__error" *ngIf="codeSender.serverError">
-            {{codeSender.serverError}}
-        </div>
-    </form>
-</ng-template>

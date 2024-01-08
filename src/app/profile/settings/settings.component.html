@@ -4,23 +4,26 @@
     </div>
     <ng-container
         *ngTemplateOutlet="settingsOption,
-        context: {header: translation.email, label: user.email}"
+        context: {header: translation.email, label: user.email, name: 'email'}"
     >
     </ng-container>
     <ng-container
         *ngTemplateOutlet="settingsOption,
-        context: {header: translation.changePassword, label: translation.passwordLength}"
+        context: {header: translation.changePassword, label: translation.passwordLength, name: 'password'}"
     >
     </ng-container>
     <div class="settings__delete-user">
         <app-button [class]="'settings__delete-user-btn'">
         </app-button>
     </div>
-<!--    <app-update-email/>-->
+    <app-update-email
+        [modalActive]="modal.email"
+        (closeEvent)="onHideModal('email')"
+    />
     <app-modal [active]="modalActive" (closeEvent)="onHideModal()"/>
 </div>
 
-<ng-template #settingsOption let-header='header' let-label='label'>
+<ng-template #settingsOption let-header='header' let-label='label' let-name='name'>
     <div class="settings__option">
         <div class="settings__option-text">
             <div class="settings__option-header">
@@ -30,7 +33,7 @@
                 {{label}}
             </div>
         </div>
-        <app-button [class]="'settings__option-btn'">
+        <app-button [class]="'settings__option-btn'" (clickEvent)="onShowModal(name)">
             {{translation.change}}
         </app-button>
     </div>

@@ -1,0 +1,34 @@
+<form class="profile-update-email-form form">
+    <div class="form__title">
+        {{translation.title}}
+    </div>
+    <app-input
+        [class]="'form__input'"
+        [name]="'email'"
+        [value]="values.email"
+        [error]="errors.email"
+        [placeholder]="translation.form.email"
+        (changeEvent)="onChange($event)"
+    />
+    <app-input
+        [class]="'form__input'"
+        [name]="'password'"
+        [value]="values.password"
+        [error]="errors.password"
+        [type]="'password'"
+        [placeholder]="translation.form.password"
+        (changeEvent)="onChange($event)"
+    />
+    <div class="form__button-wrapper">
+        <app-button
+            [class]="'form__button'"
+            (clickEvent)="onSubmit($event)"
+            [loading]="loading"
+        >
+            {{translation.save}}
+        </app-button>
+    </div>
+    <div class="form__error" *ngIf="serverError">
+        {{serverError}}
+    </div>
+</form>

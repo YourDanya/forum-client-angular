@@ -37,15 +37,15 @@ export class UserApiService {
         return this.http.post<{message: string}>(`${serverUrlRoot}/user/reset-password`, data)
     }
 
-    changeEmail(data: {email: string}) {
+    changeEmail(data: {email: string, password: string}) {
         return this.http.post<{message: string}>(`${serverUrlRoot}/user/change-email`, data)
     }
 
-    sendChangeEmailCode(data: {email: string}) {
-        return this.http.post<{message: string}>(`${serverUrlRoot}/user/send-change-email-code`, data)
+    sendChangeEmailCode() {
+        return this.http.get<{message: string}>(`${serverUrlRoot}/user/send-change-email-code`)
     }
 
-    confirmChangeEmail(data: {email: string}) {
+    confirmChangeEmail(data: {code: string}) {
         return this.http.post<{message: string}>(`${serverUrlRoot}/user/confirm-change-email`, data)
     }
 }

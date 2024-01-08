@@ -1,0 +1,42 @@
+<form class="profile-update-email-form profile-confirm-email form" type="submit">
+    <div class="form__title">
+        {{translation.title}}
+    </div>
+    <app-input
+        focusInput
+        [placeholder]="translation.code"
+        [value]="values.code"
+        [class]="'form__input'"
+        [name]="'code'"
+        [error]="errors.code"
+        (changeEvent)="onChange($event)"
+    />
+    <div class="form__buttons">
+        <app-button
+            [class]="'form__button'"
+            [loading]="confirmLoading"
+            (clickEvent)="onConfirm($event)"
+        >
+            {{translation.submit}}
+        </app-button>
+        <app-button
+            [class]="'form__resend'"
+            [loading]="resendLoading"
+            (clickEvent)="onResend($event)"
+        >
+            <div>
+                {{translation.resend}}
+                <div *ngIf="!canResend">
+                    in {{time}}
+                </div>
+            </div>
+        </app-button>
+    </div>
+    <div class="form__error">
+        {{confirmError}}
+    </div>
+    <div class="form__success">
+        {{confirmSuccess}}
+    </div>
+</form>
+

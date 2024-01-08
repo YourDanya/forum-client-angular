@@ -14,8 +14,8 @@ import {User} from 'src/app/_common/types/user/user.type'
 export class SettingsComponent {
     translation: Translation<typeof dictionary>
     user: User
-    modal = {email: false, password: false, delete: false}
-    modalActive = false
+    modal = {email: true, password: false, delete: false}
+    modalActive = true
 
     constructor(
         public translationService: TranslationService,
@@ -30,12 +30,12 @@ export class SettingsComponent {
         })
     }
 
-    onShowModal = (name: keyof typeof this.modal) => () => {
+    onShowModal = (name: keyof typeof this.modal) => {
         this.modal[name] = true
         this.modalActive = true
     }
 
-    onHideModal = (name?: keyof typeof this.modal) => () => {
+    onHideModal = (name?: keyof typeof this.modal) => {
         if (name) {
             this.modal[name] = false
         }
