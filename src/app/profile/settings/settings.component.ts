@@ -14,7 +14,7 @@ import {User} from 'src/app/_common/types/user/user.type'
 export class SettingsComponent {
     translation: Translation<typeof dictionary>
     user: User
-    modal = {email: true, password: false, delete: false}
+    modal = {email: false, password: true, delete: false}
     modalActive = true
 
     constructor(

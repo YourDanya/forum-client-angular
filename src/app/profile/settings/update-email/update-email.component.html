@@ -4,6 +4,6 @@
     (closeEvent)="onClose()"
 >
     <app-profile-change-email *ngIf="!shouldConfirm" [(shouldConfirm)]="shouldConfirm"/>
-    <app-profile-confirm-email *ngIf="shouldConfirm"/>
+    <app-profile-confirm-email *ngIf="shouldConfirm" (closeEvent)="onClose()"/>
 </app-modal-content>
 

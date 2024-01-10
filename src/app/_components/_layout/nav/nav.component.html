@@ -46,7 +46,11 @@
                 {{user?.name}}
             </div>
         </div>
-        <a class="menu__option menu__profile" routerLink="/profile">
+        <a
+            class="menu__option menu__profile"
+            [routerLink]="['/', lang, 'profile']"
+            oncontextmenu="return false;"
+        >
             <div class="menu__option-text">
                 {{translation.profile}}
             </div>

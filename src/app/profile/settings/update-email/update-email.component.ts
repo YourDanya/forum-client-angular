@@ -1,14 +1,10 @@
-import {Component, EventEmitter, Injectable, Input, Output, ViewEncapsulation} from '@angular/core'
+import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core'
 import {Translation} from 'src/app/_common/types/translation/translation.types'
-import {dictionary, emailValidations} from 'src/app/profile/settings/update-email/update-email.content'
+import {dictionary} from 'src/app/profile/settings/update-email/update-email.content'
 import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
-import {InputEvent} from 'src/app/_common/types/form/input-event.type'
-import inputChange from 'src/app/_common/utils/form/input-change/input-change'
-import {initValues} from 'src/app/_components/_layout/nav/auth/auth.content'
 import {Validator} from 'src/app/_common/utils/form/validation/validator.class'
 import {Lang} from 'src/app/_common/types/translation/lang.type'
 import {Location} from '@angular/common'
-import {UserApiService} from 'src/app/_common/api/user/user-api.service'
 
 @Component({
     selector: 'app-update-email',
@@ -19,7 +15,7 @@ import {UserApiService} from 'src/app/_common/api/user/user-api.service'
 export class UpdateEmailComponent {
     translation: Translation<typeof dictionary>
     lang: Lang
-    shouldConfirm = true
+    shouldConfirm = false
 
     @Input()
     modalActive = false
@@ -33,9 +29,12 @@ export class UpdateEmailComponent {
     ) {
         this.translation = this.translationService.translate(dictionary)
     }
-
+    
     onClose() {
         this.closeEvent.emit()
+        if (this.shouldConfirm) {
+            this.shouldConfirm = false
+        }
     }
 }
 

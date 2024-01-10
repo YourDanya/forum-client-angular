@@ -42,10 +42,14 @@ export class UserApiService {
     }
 
     sendChangeEmailCode() {
-        return this.http.get<{message: string}>(`${serverUrlRoot}/user/send-change-email-code`)
+        return this.http.get<{message: string, timer: number}>(`${serverUrlRoot}/user/send-change-email-code`)
     }
 
     confirmChangeEmail(data: {code: string}) {
-        return this.http.post<{message: string}>(`${serverUrlRoot}/user/confirm-change-email`, data)
+        return this.http.post<{message: string, user: User}>(`${serverUrlRoot}/user/confirm-change-email`, data)
+    }
+
+    updatePassword(data: {currentPassword: string, newPassword: string, newPasswordConfirm: string}) {
+        return this.http.post<{message: string}>(`${serverUrlRoot}/user/update-password`, data)
     }
 }

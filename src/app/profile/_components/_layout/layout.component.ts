@@ -6,6 +6,7 @@ import {Translation} from 'src/app/_common/types/translation/translation.types'
 import {Location} from '@angular/common'
 import {User} from 'src/app/_common/types/user/user.type'
 import {UserStoreService} from 'src/app/_common/store/user/user-store.service'
+import {Router} from '@angular/router'
 
 @Component({
     selector: 'app-profile-layout',
@@ -22,6 +23,7 @@ export class LayoutComponent {
         public translationSerice: TranslationService,
         public location: Location,
         public userStoreService: UserStoreService,
+        public router: Router
     ) {
         this.translation = this.translationSerice.translate(dictionary)
         const locationArr = this.location.path().split('/')
@@ -30,7 +32,8 @@ export class LayoutComponent {
 
         if (!this.menuActiveLink) {
             this.menuActiveLink = 'settings'
-            this.location.go(`${this.lang}/profile/settings`)
+            this.router.navigate([`/${this.lang}/profile/settings`])
+            console.log('should go')
         }
 
         this.userStoreService.user$.subscribe((user) => {

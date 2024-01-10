@@ -12,6 +12,9 @@ import {RouterModule} from '@angular/router'
 import {HttpClientModule} from '@angular/common/http'
 import {httpInterceptorsProviders} from 'src/app/_common/api/interceptors/interceptors'
 import {AvaSvgComponent} from 'src/app/_common/svg/ava/ava.component'
+import {
+    FocusInputOnHoverDirective
+} from 'src/app/_common/directives/focus-input-on-hover/focus-input-on-hover.directive'
 
 @NgModule({
     imports: [
@@ -19,11 +22,11 @@ import {AvaSvgComponent} from 'src/app/_common/svg/ava/ava.component'
     ],
     declarations: [
         ButtonComponent, SpinnerComponent, InputComponent, ModalComponent, ModalContentComponent,
-        SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent, AvaSvgComponent
+        SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent, AvaSvgComponent, FocusInputOnHoverDirective
     ],
     exports: [
         CommonModule, ButtonComponent, SpinnerComponent, InputComponent, ModalComponent, ModalContentComponent,
-        SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent, AvaSvgComponent
+        SearchSvgComponent, GoogleSvgComponent, CloseSvgComponent, AvaSvgComponent, FocusInputOnHoverDirective
     ],
     providers: [
         httpInterceptorsProviders

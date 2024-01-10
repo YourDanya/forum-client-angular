@@ -8,6 +8,8 @@ import {NavigationStart, Router} from '@angular/router'
 import {filter, map} from 'rxjs'
 import {User} from 'src/app/_common/types/user/user.type'
 import {UserStoreService} from 'src/app/_common/store/user/user-store.service'
+import {Lang} from 'src/app/_common/types/translation/lang.type'
+import {Location} from '@angular/common'
 
 @Component({
     selector: 'app-nav',
@@ -22,6 +24,7 @@ export class NavComponent {
     hide = false
     accountMenuShown = false
     user: User | null | undefined
+    lang: Lang
 
     @ViewChild('dropdownButton', {read: ElementRef}) button: ElementRef
     @ViewChild('userMenuDiv') menu: ElementRef
@@ -30,10 +33,12 @@ export class NavComponent {
         private translationService: TranslationService,
         private router: Router,
         private renderer: Renderer2,
-        private userStoreService: UserStoreService
+        private userStoreService: UserStoreService,
+        public location: Location
     ) {
         this.translation = this.translationService.translate(dictionary)
         this.renderer.listen('window', 'click', this.onDropdownClick)
+        this.lang = location.path().split('/')[1] as Lang
     }
 
     onDropdownClick = (event: Event) => {

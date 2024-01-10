@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core'
+import {Component, EventEmitter, Output, ViewEncapsulation} from '@angular/core'
 import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import {Translation} from 'src/app/_common/types/translation/translation.types'
 import {dictionary} from 'src/app/profile/settings/update-email/confirm-email/confirm-email.content'
@@ -31,13 +31,16 @@ export class ConfirmEmailComponent {
     canResend = true
     time: string
 
+    @Output()
+    closeEvent = new EventEmitter()
+
     constructor(
         public translationService: TranslationService,
         public userApiService: UserApiService,
         public validationService: ValidationService<{code: string}>,
         public timer: Timer,
         public userStoreService: UserStoreService,
-        public location: Location
+        public location: Location,
     ) {
         this.translation = this.translationService.translate(dictionary)
         this.validationService.values = this.values
@@ -62,7 +65,7 @@ export class ConfirmEmailComponent {
         }
         this.resendLoading = true
 
-        this.userApiService.sendRegisterCode().subscribe({
+        this.userApiService.sendChangeEmailCode().subscribe({
             error: this.onResendError,
             next: this.onResendSucces
         })
@@ -88,10 +91,11 @@ export class ConfirmEmailComponent {
         }
 
         this.confirmLoading = true
-        this.userApiService.confirmRegisterEmail(this.values).subscribe({
+        this.userApiService.confirmChangeEmail(this.values).subscribe({
             error: this.onConfirmError,
             next: this.onConfirmSuccss
         })
+        this.closeEvent.emit()
     }
 
     onConfirmError = (error: Error) => {
@@ -104,8 +108,9 @@ export class ConfirmEmailComponent {
         this.confirmSuccess = res.message
         this.confirmError = ''
 
-        const locale = this.location.path().split('/')[1]
-        this.location.go(`${locale}`)
+        this.userStoreService.setUser(res.user)
+
+        this.closeEvent.emit()
     }
 
     ngOnInit() {

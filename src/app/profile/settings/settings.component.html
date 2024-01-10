@@ -20,6 +20,10 @@
         [modalActive]="modal.email"
         (closeEvent)="onHideModal('email')"
     />
+    <app-update-password
+        [modalActive]="modal.password"
+        (closeEvent)="onHideModal('password')"
+    />
     <app-modal [active]="modalActive" (closeEvent)="onHideModal()"/>
 </div>
 

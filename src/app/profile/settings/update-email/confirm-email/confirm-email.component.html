@@ -13,23 +13,23 @@
     />
     <div class="form__buttons">
         <app-button
-            [class]="'form__button'"
-            [loading]="confirmLoading"
-            (clickEvent)="onConfirm($event)"
-        >
-            {{translation.submit}}
-        </app-button>
-        <app-button
             [class]="'form__resend'"
             [loading]="resendLoading"
             (clickEvent)="onResend($event)"
         >
             <div>
                 {{translation.resend}}
-                <div *ngIf="!canResend">
+                <span *ngIf="!canResend">
                     in {{time}}
-                </div>
+                </span>
             </div>
+        </app-button>
+        <app-button
+            [class]="'form__button'"
+            [loading]="confirmLoading"
+            (clickEvent)="onConfirm($event)"
+        >
+            {{translation.submit}}
         </app-button>
     </div>
     <div class="form__error">
