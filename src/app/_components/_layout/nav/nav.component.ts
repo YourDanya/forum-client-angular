@@ -5,11 +5,12 @@ import {TranslationService} from 'src/app/_common/utils/helpers/translation/tans
 import {Translation} from 'src/app/_common/types/translation/translation.types'
 import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import {NavigationStart, Router} from '@angular/router'
-import {filter, map} from 'rxjs'
+import {filter, map, Subscription} from 'rxjs'
 import {User} from 'src/app/_common/types/user/user.type'
 import {UserStoreService} from 'src/app/_common/store/user/user-store.service'
 import {Lang} from 'src/app/_common/types/translation/lang.type'
 import {Location} from '@angular/common'
+import {UserApiService} from 'src/app/_common/api/user/user-api.service'
 
 @Component({
     selector: 'app-nav',
@@ -25,16 +26,18 @@ export class NavComponent {
     accountMenuShown = false
     user: User | null | undefined
     lang: Lang
+    routerSubscription: Subscription
 
     @ViewChild('dropdownButton', {read: ElementRef}) button: ElementRef
     @ViewChild('userMenuDiv') menu: ElementRef
 
     constructor(
-        private translationService: TranslationService,
-        private router: Router,
-        private renderer: Renderer2,
-        private userStoreService: UserStoreService,
-        public location: Location
+        public translationService: TranslationService,
+        public router: Router,
+        public renderer: Renderer2,
+        public userStoreService: UserStoreService,
+        public location: Location,
+        public userApiService: UserApiService
     ) {
         this.translation = this.translationService.translate(dictionary)
         this.renderer.listen('window', 'click', this.onDropdownClick)
@@ -49,17 +52,22 @@ export class NavComponent {
             return
         }
 
-        if (!this.button.nativeElement.contains(event.target) || this.accountMenuShown) {
-            this.accountMenuShown = false
-        } else {
+        let contains = false
+        if (this.button) {
+            contains = this.button.nativeElement.contains(event.target)
+        }
+
+        if (!this.accountMenuShown && contains) {
             this.accountMenuShown = true
+        } else if (this.accountMenuShown) {
+            this.accountMenuShown = false
         }
     }
 
     ngOnInit() {
         this.checkHide(this.router.url)
 
-        this.router.events.pipe(
+        this.routerSubscription = this.router.events.pipe(
             filter(event => event instanceof NavigationStart),
             map(event => event as NavigationStart),
         ).subscribe((event) => {
@@ -71,12 +79,24 @@ export class NavComponent {
         })
     }
 
+    ngOnDestroy() {
+        this.routerSubscription.unsubscribe()
+    }
+
     onSearchChange(event: InputEvent) {
         this.searchValue = event.currentTarget.value
     }
 
     onLoginClick() {
         this.modalActive = true
+    }
+
+    onLogoutClick = () => {
+        this.userApiService.logout().subscribe({
+            next: () => {
+                this.userStoreService.setUser(null)
+            }
+        })
     }
 
     onCloseModal() {

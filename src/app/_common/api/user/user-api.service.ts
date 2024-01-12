@@ -17,6 +17,10 @@ export class UserApiService {
         return this.http.post<{user: User, message: string}>(`${serverUrlRoot}/user/login`, data)
     }
 
+    logout () {
+        return this.http.post<{message: string}>(`${serverUrlRoot}/user/logout`, {})
+    }
+
     register(data: {email: string, name: string, password: string, passwordConfirm: string}) {
         return this.http.post<{message: string}>(`${serverUrlRoot}/user/register`, data)
     }
@@ -29,7 +33,7 @@ export class UserApiService {
         return this.http.post<{message: string, user: User}>(`${serverUrlRoot}/user/confirm-register-email`, data)
     }
 
-    forgorPassword(data: {email: string}) {
+    forgotPassword(data: {email: string}) {
         return this.http.post<{message: string}>(`${serverUrlRoot}/user/forgot-password`, data)
     }
 
@@ -51,5 +55,9 @@ export class UserApiService {
 
     updatePassword(data: {currentPassword: string, newPassword: string, newPasswordConfirm: string}) {
         return this.http.post<{message: string}>(`${serverUrlRoot}/user/update-password`, data)
+    }
+
+    updateUser(data: {name: string, description: string}) {
+        return this.http.post<{message: string}>(`${serverUrlRoot}/user/update-user`, data)
     }
 }

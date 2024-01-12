@@ -7,12 +7,13 @@ import {LayoutComponent} from 'src/app/profile/_components/_layout/layout.compon
 import {ProfileRoutingModule} from 'src/app/profile/profile-routing.module'
 import {ChangeEmailComponent} from 'src/app/profile/settings/update-email/change-email/change-email.component'
 import {ConfirmEmailComponent} from 'src/app/profile/settings/update-email/confirm-email/confirm-email.component'
+import {AboutComponent} from 'src/app/profile/about/about.component'
 
 @NgModule({
     imports: [SharedModule, ProfileRoutingModule],
     declarations: [
         LayoutComponent, SettingsComponent, UpdateEmailComponent, UpdatePasswordComponent,
-        ChangeEmailComponent, ConfirmEmailComponent
+        ChangeEmailComponent, ConfirmEmailComponent, AboutComponent
     ]
 })
 export class ProfileModule {}

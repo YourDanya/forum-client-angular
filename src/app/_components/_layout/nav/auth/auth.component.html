@@ -56,14 +56,13 @@
 <ng-template #bottom>
     <div class="auth__forgot">
         {{translation.forgot}}
-        <a class="auth__link" routerLink="auth/forgot" (click)="onClose()">
+        <a class="auth__link" [routerLink]="['/', lang, 'auth', 'forgot']" (click)="onClose()">
             {{translation.password}}
-        </a>
-        ?
+        </a>?
     </div>
     <div class="auth__signup">
         {{translation.new}}
-        <a class="auth__link" routerLink="auth/register" (click)="onClose()">
+        <a class="auth__link" [routerLink]="['/', lang, 'auth', 'register']" (click)="onClose()">
             {{translation.signup}}
         </a>
     </div>

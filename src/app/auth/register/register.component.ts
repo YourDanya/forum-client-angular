@@ -8,5 +8,5 @@ import {ValidationService} from 'src/app/_common/utils/form/validation/validatio
     providers: [ValidationService],
 })
 export class RegisterComponent {
-    shouldConfirm = true
+    shouldConfirm = false
 }

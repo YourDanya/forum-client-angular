@@ -19,6 +19,7 @@ export class InputComponent {
     @Input() class = ''
     @Input() value: string | number
 
+
     @Output() changeEvent = new EventEmitter<InputEvent>()
 
     focused = false

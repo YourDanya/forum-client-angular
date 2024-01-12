@@ -1,5 +1,5 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild, ViewEncapsulation} from '@angular/core'
-import {ActivatedRoute} from '@angular/router'
+import {Component,  EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core'
+import {Router} from '@angular/router'
 import {dictionary} from 'src/app/_components/_layout/nav/auth/auth.content'
 import {initErrors} from 'src/app/_components/_layout/nav/auth/auth.content'
 import {ValidationService} from 'src/app/_common/utils/form/validation/validation.service'
@@ -12,6 +12,8 @@ import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import {InputErrors} from 'src/app/_common/types/form/input-errors.type'
 import {User} from 'src/app/_common/types/user/user.type'
 import {UserApiService} from 'src/app/_common/api/user/user-api.service'
+import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
+import {UserStoreService} from 'src/app/_common/store/user/user-store.service'
 
 @Component({
     selector: 'app-auth',
@@ -35,14 +37,16 @@ export class AuthComponent {
 
     @Output()
     closeEvent = new EventEmitter()
-
+    lang: Lang
     constructor(
-        private route: ActivatedRoute,
-        private validationService: ValidationService<typeof initValues>,
-        private userApiService: UserApiService
+        public validationService: ValidationService<typeof initValues>,
+        public userApiService: UserApiService,
+        public router: Router,
+        public translationService: TranslationService,
+        public userStoreService: UserStoreService
     ) {
-        const lang = <Lang> this.route.snapshot.paramMap.get('lang')
-        this.translation = dictionary[lang]
+        this.lang = this.router.url.split('/')[1] as Lang
+        this.translation = this.translationService.translate(dictionary)
         this.validationService.values = this.values
 
         this.validationService.errors = {...initErrors}
@@ -61,10 +65,6 @@ export class AuthComponent {
     }
     onClose () {
         this.closeEvent.emit()
-        this.userApiService.login(this.values).subscribe({
-            next: this.loginSuccess,
-            error: this.loginError
-        })
     }
 
     onSubmit (event: Event) {
@@ -87,6 +87,8 @@ export class AuthComponent {
         this.loading = false
         this.success = data.message
         this.error = ''
+        this.userStoreService.setUser(data.user)
+        this.values = {...initValues}
     }
 
     loginError = (error: Error) => {

@@ -1,0 +1,44 @@
+<form
+    [class]="'profile-about about'"
+>
+    <div class="about__title">
+        {{translation.title}}
+    </div>
+    <div class="about__label">
+        {{translation.form.name}}
+    </div>
+    <app-input
+        [class]="'about__input'"
+        [name]="'name'"
+        [value]="values.name"
+        [error]="errors.name"
+        [placeholder]="translation.form.name"
+        (changeEvent)="onChange($event)"
+    />
+    <div class="about__label">
+        {{translation.form.description}}
+    </div>
+    <app-input
+        [class]="'about__input'"
+        [name]="'description'"
+        [value]="values.description"
+        [error]="errors.description"
+        [type]="'textarea'"
+        [placeholder]="translation.form.description"
+        (changeEvent)="onChange($event)"
+    />
+    <app-button
+        [class]="'about__button'"
+        (clickEvent)="onSubmit($event)"
+        [loading]="loading"
+    >
+        {{translation.save}}
+    </app-button>
+    <div class="about__error" *ngIf="serverError">
+        {{serverError}}
+    </div>
+    <div class="about__success" *ngIf="success">
+        {{success}}
+    </div>
+</form>
+

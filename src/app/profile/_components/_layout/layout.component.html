@@ -7,6 +7,13 @@
         >
             {{translation.settings}}
         </a>
+        <a
+            class="menu__item"
+            [class.menu__item--active]="menuActiveLink==='about'"
+            [routerLink]="['/profile/about']"
+        >
+            {{translation.about}}
+        </a>
     </div>
     <div class="profile-page">
         <router-outlet></router-outlet>

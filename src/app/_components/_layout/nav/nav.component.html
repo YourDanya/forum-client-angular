@@ -55,7 +55,7 @@
                 {{translation.profile}}
             </div>
         </a>
-        <app-button [class]="'menu__option menu__logout'">
+        <app-button [class]="'menu__option menu__logout'" (clickEvent)="onLogoutClick()">
             <i class="icon menu__option-icon"></i>
             <div class="menu__option-text">
                 {{translation.logout}}

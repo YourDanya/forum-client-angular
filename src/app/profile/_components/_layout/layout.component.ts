@@ -6,7 +6,8 @@ import {Translation} from 'src/app/_common/types/translation/translation.types'
 import {Location} from '@angular/common'
 import {User} from 'src/app/_common/types/user/user.type'
 import {UserStoreService} from 'src/app/_common/store/user/user-store.service'
-import {Router} from '@angular/router'
+import {NavigationStart, Router} from '@angular/router'
+import {filter, map, Subscription} from 'rxjs'
 
 @Component({
     selector: 'app-profile-layout',
@@ -19,6 +20,7 @@ export class LayoutComponent {
     translation: Translation<typeof dictionary>
     user: User
     menuActiveLink : string
+    routerSubscribtion: Subscription
     constructor(
         public translationSerice: TranslationService,
         public location: Location,
@@ -26,15 +28,15 @@ export class LayoutComponent {
         public router: Router
     ) {
         this.translation = this.translationSerice.translate(dictionary)
-        const locationArr = this.location.path().split('/')
-        this.lang = locationArr[1] as Lang
-        this.menuActiveLink = locationArr[3]
 
-        if (!this.menuActiveLink) {
-            this.menuActiveLink = 'settings'
-            this.router.navigate([`/${this.lang}/profile/settings`])
-            console.log('should go')
-        }
+        this.checkUrl(router.url)
+
+        this.routerSubscribtion = this.router.events.pipe(
+            filter(event => event instanceof NavigationStart),
+            map(event => event as NavigationStart),
+        ).subscribe((event) => {
+            this.checkUrl(event.url)
+        })
 
         this.userStoreService.user$.subscribe((user) => {
             if (!user) {
@@ -47,7 +49,27 @@ export class LayoutComponent {
         })
     }
 
+    checkUrl (url: string) {
+        const urlArr = url.split('/')
+
+        if (urlArr[1] !== 'en' &&  urlArr[1] !== 'ru' || urlArr[2] !== 'profile') {
+            return
+        }
+
+        this.lang = urlArr[1]
+        this.menuActiveLink = urlArr[3]
+
+        if (!this.menuActiveLink) {
+            this.menuActiveLink = 'settings'
+            this.router.navigate([`/${this.lang}/profile/settings`], {replaceUrl: true})
+        }
+    }
+
     isNotLogged() {
-        this.location.go(`/${this.lang}/auth/login`)
+        this.router.navigate([`/${this.lang}/auth/login`])
+    }
+
+    ngOnDestroy() {
+        this.routerSubscribtion.unsubscribe()
     }
 }

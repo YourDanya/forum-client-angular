@@ -9,6 +9,8 @@ import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import inputChange from 'src/app/_common/utils/form/input-change/input-change'
 import {UserApiService} from 'src/app/_common/api/user/user-api.service'
 import {User} from 'src/app/_common/types/user/user.type'
+import {Router} from '@angular/router'
+import {Lang} from 'src/app/_common/types/translation/lang.type'
 import {UserStoreService} from 'src/app/_common/store/user/user-store.service'
 
 @Component({
@@ -26,12 +28,16 @@ export class LoginComponent {
     loading = false
     error = ''
     success = ''
+    lang: Lang
     constructor(
-        private translationService: TranslationService,
-        private validationService: ValidationService<typeof initValues>,
-        private userApiService: UserApiService
+        public translationService: TranslationService,
+        public validationService: ValidationService<typeof initValues>,
+        public userApiService: UserApiService,
+        public router: Router,
+        public userStoreService: UserStoreService
     ) {
         this.translation = this.translationService.translate(dictionary)
+        this.lang = this.router.url.split('/')[1] as Lang
 
         this.validationService.values = this.values
         this.validationService.errors = this.errors
@@ -64,6 +70,8 @@ export class LoginComponent {
         this.loading = false
         this.success = data.message
         this.error = ''
+        this.userStoreService.setUser(data.user)
+        this.router.navigate([`/${this.lang}`])
     }
 
     loginError = (error: Error) => {

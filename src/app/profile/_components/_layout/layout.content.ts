@@ -1,8 +1,10 @@
 export const dictionary = {
     en: {
-        settings: 'Settings'
+        settings: 'Settings',
+        about: 'About'
     },
     ru: {
-        settings: 'Настройки'
+        settings: 'Настройки',
+        about: 'Обо мне'
     }
 }

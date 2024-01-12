@@ -1,23 +1,23 @@
-import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core'
+import {Component, ViewEncapsulation} from '@angular/core'
+import {ValidationService} from 'src/app/_common/utils/form/validation/validation.service'
 import {Translation} from 'src/app/_common/types/translation/translation.types'
-import {dictionary, initValues, validations} from 'src/app/profile/settings/update-password/update-password.content'
-import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
 import {Lang} from 'src/app/_common/types/translation/lang.type'
+import {TranslationService} from 'src/app/_common/utils/helpers/translation/tanslation.service'
 import {Validator} from 'src/app/_common/utils/form/validation/validator.class'
 import {Location} from '@angular/common'
-import {ValidationService} from 'src/app/_common/utils/form/validation/validation.service'
+import {UserApiService} from 'src/app/_common/api/user/user-api.service'
 import {InputEvent} from 'src/app/_common/types/form/input-event.type'
 import inputChange from 'src/app/_common/utils/form/input-change/input-change'
-import {UserApiService} from 'src/app/_common/api/user/user-api.service'
+import {dictionary, initValues, validations} from 'src/app/profile/about/about.content'
 
 @Component({
-    selector: 'app-update-password',
-    templateUrl: 'update-password.component.html',
-    styleUrls: ['update-password.styles.sass'],
+    selector: 'app-profile-about',
+    templateUrl: 'about.component.html',
+    styleUrls: ['about.styles.sass'],
     encapsulation: ViewEncapsulation.None,
     providers: [ValidationService]
 })
-export class UpdatePasswordComponent {
+export class AboutComponent {
     translation: Translation<typeof dictionary>
     lang: Lang
     values = {...initValues}
@@ -25,11 +25,6 @@ export class UpdatePasswordComponent {
     serverError = ''
     loading: false
     success = ''
-
-    @Input()
-    modalActive = false
-    @Output()
-    closeEvent = new EventEmitter()
 
     constructor(
         public translationService: TranslationService,
@@ -63,7 +58,7 @@ export class UpdatePasswordComponent {
             return
         }
 
-        this.userApiService.updatePassword(this.values).subscribe({
+        this.userApiService.updateUser(this.values).subscribe({
             next: this.onSuccess,
             error: this.onError
         })
@@ -79,13 +74,5 @@ export class UpdatePasswordComponent {
         this.serverError = ''
         this.success = res.message
         this.values = {...initValues}
-
-        setTimeout(() => {
-            this.closeEvent.emit()
-        }, 3000)
-    }
-
-    onClose() {
-        this.closeEvent.emit()
     }
 }
